@@ -1,1 +1,2 @@
-# reversi
+# Reversi
+Reversi is a game.
