@@ -15,11 +15,11 @@
 
 #gameBoard {
     margin: auto;
-    background: radial-gradient(at 35% 35%, #4b2709 0%, #3f1f05 65%, #3a1b02 100%);
-    height: fit-content;
-    width: fit-content;
+    /*background: radial-gradient(at 35% 35%, #4b2709 0%, #3f1f05 65%, #3a1b02 100%);*/
+    height: auto;
+    width: 80%;
+    margin:0 auto;
     padding: 0.8em;
-    border-radius: 5%;
 }
 
 #board {
@@ -27,7 +27,9 @@
     margin: auto;
     height: fit-content;
     width: fit-content;
-    border: 1em;
+    border: 1em solid #4b2709;
+    border-radius: 5%;
+    background-color: #4b2709;
 }
 
 .player_sidebar {
@@ -81,5 +83,5 @@
     width: 12vw;
     height: 12vw;
     border-radius: 50%;
-    vertical-align: middle;
+    margin: auto 1em;
 }
