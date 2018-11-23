@@ -1,0 +1,151 @@
+h2 {
+    font-size: 2.4em;
+    margin: 0 1em;
+}
+.modal {
+    z-index: 3;
+    display: none;
+    padding-top: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    width: 600px;
+}
+
+.container {
+    position: relative;
+    padding: 16px;
+
+}
+
+.header {
+    color: #fff!important;
+    background-color: #009688!important;
+    padding: 10px;
+}
+
+.card-4 {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.button {
+    border: none;
+    display: inline-block;
+    outline: 0;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.display-topright {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.large {
+    font-size: 2.4em!important;
+}
+
+.button {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.animate-opacity {
+    animation: opac 0.8s;
+}
+
+@keyframes opac {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.card {
+    display: inline-block;
+    height: 20em;
+    width: 20em;
+    position: relative;
+    border-radius: 20px;
+    background-image: url(../rsrc/dog1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #eceef1;
+    font-size: 0.5em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.card:hover {
+    background-color: #1abc9c;
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.darken {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #333a45;
+    opacity: 0.5;
+}
+
+.nome {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0px auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2em;
+}
+
+.submit {
+    width: 100%;
+    height: 2em;
+    font-size: 1.8em;
+    border: none;
+    color: #fff!important;
+    background-color: #009688!important;
+}
+
+.selected {
+    filter: contrast(125%);
+    border: 3px solid #1abc9c;
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}

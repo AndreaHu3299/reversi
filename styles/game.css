@@ -74,12 +74,12 @@
 }
 
 .profileContainer {
-    border: 4px solid #363636;
-    border-radius: 50%;
     
 }
 .profileImage {
-    width: 100%;
-    height: 100%;
+    border: 4px solid #363636;
+    width: 12vw;
+    height: 12vw;
     border-radius: 50%;
+    vertical-align: middle;
 }
