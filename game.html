@@ -13,103 +13,105 @@
 
 <body>
     <div id="background">
-        <div id="player1Sidebar" class="player_sidebar">
-            <div id="player1IconContainer" class="profileContainer">
-                <img src="images/blank-profile-picture.png" class="profileImage">
-            </div>
+        <div id="player1Sidebar" class="player_sidebar player1">
+            <img src="img/blank-profile-picture.png" class="profileImage">
+            <span if="player1Username" class="playerUsernameText">You</span>
+            <div class="disk disk_white sidebarDisk"></div>
+            <span id="player1DiskCount" class="infoText">2</span>
+            <img src="img/clockIcon.png" class="clockIcon"/>
+            <span id="player1Timer" class="infoText">00:12</span>
         </div>
         <div id="gameBoard">
-            <table id="board">
-                <tr id="row1">
-                    <td id="cell_a1" class="cell"></td>
-                    <td id="cell_b1" class="cell"></td>
-                    <td id="cell_c1" class="cell"></td>
-                    <td id="cell_d1" class="cell"></td>
-                    <td id="cell_e1" class="cell"></td>
-                    <td id="cell_f1" class="cell"></td>
-                    <td id="cell_g1" class="cell"></td>
-                    <td id="cell_h1" class="cell"></td>
-                </tr>
-                <tr id="row2">
-                    <td id="cell_a2" class="cell"></td>
-                    <td id="cell_b2" class="cell"></td>
-                    <td id="cell_c2" class="cell"></td>
-                    <td id="cell_d2" class="cell"></td>
-                    <td id="cell_e2" class="cell"></td>
-                    <td id="cell_f2" class="cell"></td>
-                    <td id="cell_g2" class="cell"></td>
-                    <td id="cell_h2" class="cell"></td>
-                </tr>
-                <tr id="row3">
-                    <td id="cell_a3" class="cell"></td>
-                    <td id="cell_b3" class="cell"></td>
-                    <td id="cell_c3" class="cell"></td>
-                    <td id="cell_d3" class="cell"></td>
-                    <td id="cell_e3" class="cell"></td>
-                    <td id="cell_f3" class="cell"></td>
-                    <td id="cell_g3" class="cell"></td>
-                    <td id="cell_h3" class="cell"></td>
-                </tr>
-                <tr id="row4">
-                    <td id="cell_a4" class="cell"></td>
-                    <td id="cell_b4" class="cell"></td>
-                    <td id="cell_c4" class="cell"></td>
-                    <td id="cell_d4" class="cell">
-                        <div class="peg peg_white"></div>
-                    </td>
-                    <td id="cell_e4" class="cell">
-                        <div class="peg peg_black"></div>
-                    </td>
-                    <td id="cell_f4" class="cell"></td>
-                    <td id="cell_g4" class="cell"></td>
-                    <td id="cell_h4" class="cell"></td>
-                </tr>
-                <tr id="row5">
-                    <td id="cell_a5" class="cell"></td>
-                    <td id="cell_b5" class="cell"></td>
-                    <td id="cell_c5" class="cell"></td>
-                    <td id="cell_d5" class="cell">
-                        <div class="peg peg_black"></div>
-                    </td>
-                    <td id="cell_e5" class="cell">
-                        <div class="peg peg_white"></div>
-                    </td>
-                    <td id="cell_f5" class="cell"></td>
-                    <td id="cell_g5" class="cell"></td>
-                    <td id="cell_h5" class="cell"></td>
-                </tr>
-                <tr id="row6">
-                    <td id="cell_a6" class="cell"></td>
-                    <td id="cell_b6" class="cell"></td>
-                    <td id="cell_c6" class="cell"></td>
-                    <td id="cell_d6" class="cell"></td>
-                    <td id="cell_e6" class="cell"></td>
-                    <td id="cell_f6" class="cell"></td>
-                    <td id="cell_g6" class="cell"></td>
-                    <td id="cell_h6" class="cell"></td>
-                </tr>
-                <tr id="row7">
-                    <td id="cell_a7" class="cell"></td>
-                    <td id="cell_b7" class="cell"></td>
-                    <td id="cell_c7" class="cell"></td>
-                    <td id="cell_d7" class="cell"></td>
-                    <td id="cell_e7" class="cell"></td>
-                    <td id="cell_f7" class="cell"></td>
-                    <td id="cell_g7" class="cell"></td>
-                    <td id="cell_h7" class="cell"></td>
-                </tr>
-                <tr id="row8">
-                    <td id="cell_a8" class="cell"></td>
-                    <td id="cell_b8" class="cell"></td>
-                    <td id="cell_c8" class="cell"></td>
-                    <td id="cell_d8" class="cell"></td>
-                    <td id="cell_e8" class="cell"></td>
-                    <td id="cell_f8" class="cell"></td>
-                    <td id="cell_g8" class="cell"></td>
-                    <td id="cell_h8" class="cell"></td>
-                </tr>
-            </table>
+            <!--row 1-->
+            <div id="cell_a1" class="cell"></div>
+            <div id="cell_b1" class="cell"></div>
+            <div id="cell_c1" class="cell"></div>
+            <div id="cell_d1" class="cell"></div>
+            <div id="cell_e1" class="cell"></div>
+            <div id="cell_f1" class="cell"></div>
+            <div id="cell_g1" class="cell"></div>
+            <div id="cell_h1" class="cell"></div>
+            <!--row 2-->
+            <div id="cell_a2" class="cell"></div>
+            <div id="cell_b2" class="cell"></div>
+            <div id="cell_c2" class="cell"></div>
+            <div id="cell_d2" class="cell"></div>
+            <div id="cell_e2" class="cell"></div>
+            <div id="cell_f2" class="cell"></div>
+            <div id="cell_g2" class="cell"></div>
+            <div id="cell_h2" class="cell"></div>
+            <!--row 3-->
+            <div id="cell_a3" class="cell"></div>
+            <div id="cell_b3" class="cell"></div>
+            <div id="cell_c3" class="cell"></div>
+            <div id="cell_d3" class="cell"></div>
+            <div id="cell_e3" class="cell"></div>
+            <div id="cell_f3" class="cell"></div>
+            <div id="cell_g3" class="cell"></div>
+            <div id="cell_h3" class="cell"></div>
+            <!--row 4-->
+            <div id="cell_a4" class="cell"></div>
+            <div id="cell_b4" class="cell"></div>
+            <div id="cell_c4" class="cell"></div>
+            <div id="cell_d4" class="cell">
+                <div class="disk disk_white"></div>
+            </div>
+            <div id="cell_e4" class="cell">
+                <div class="disk disk_black"></div>
+            </div>
+            <div id="cell_f4" class="cell"></div>
+            <div id="cell_g4" class="cell"></div>
+            <div id="cell_h4" class="cell"></div>
+            <!--row 5-->
+            <div id="cell_a5" class="cell"></div>
+            <div id="cell_b5" class="cell"></div>
+            <div id="cell_c5" class="cell"></div>
+            <div id="cell_d5" class="cell">
+                <div class="disk disk_black"></div>
+            </div>
+            <div id="cell_e5" class="cell">
+                <div class="disk disk_white"></div>
+            </div>
+            <div id="cell_f5" class="cell"></div>
+            <div id="cell_g5" class="cell"></div>
+            <div id="cell_h5" class="cell"></div>
+            <!--row 6-->
+            <div id="cell_a6" class="cell"></div>
+            <div id="cell_b6" class="cell"></div>
+            <div id="cell_c6" class="cell"></div>
+            <div id="cell_d6" class="cell"></div>
+            <div id="cell_e6" class="cell"></div>
+            <div id="cell_f6" class="cell"></div>
+            <div id="cell_g6" class="cell"></div>
+            <div id="cell_h6" class="cell"></div>
+            <!--row 7-->
+            <div id="cell_a7" class="cell"></div>
+            <div id="cell_b7" class="cell"></div>
+            <div id="cell_c7" class="cell"></div>
+            <div id="cell_d7" class="cell"></div>
+            <div id="cell_e7" class="cell"></div>
+            <div id="cell_f7" class="cell"></div>
+            <div id="cell_g7" class="cell"></div>
+            <div id="cell_h7" class="cell"></div>
+            <!--row 8-->
+            <div id="cell_a8" class="cell"></div>
+            <div id="cell_b8" class="cell"></div>
+            <div id="cell_c8" class="cell"></div>
+            <div id="cell_d8" class="cell"></div>
+            <div id="cell_e8" class="cell"></div>
+            <div id="cell_f8" class="cell"></div>
+            <div id="cell_g8" class="cell"></div>
+            <div id="cell_h8" class="cell"></div>
         </div>
+        <div id="player2Sidebar" class="player_sidebar player2">
+            <img src="img/blank-profile-picture.png" class="profileImage">
+            <span id="player2Username" class="playerUsernameText">Opponent</span>
+            <div class="disk disk_white sidebarDisk"></div>
+            <span id="player2DiskCount" class="infoText">2</span>
+            <img src="img/clockIcon.png" class="clockIcon"/>
+            <span id="player2Timer" class="infoText">00:00</span>
+        </div>
+        
     </div>
 </body>
 
