@@ -1,13 +1,17 @@
-var http = require("http");
+const express = require("express");
+const http = require("http");
+const websocket = require("ws");
 
-var port = process.argv[2];
+const indexRouter = require("./routes/index");
+const messages = require("./public/javascripts/messages");
 
-var server = http.createServer(function (req, res) {
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    res.end("Hello World!");
-    console.log("HTTP response sent");
-})
+const gameStatus = require("./statTracker");
+const Game = require("./game");
 
-server.listen(port, function () {
-    console.log("Listening on port " + port);
-});
+const port = process.argv[2] || process.env.PORT || 3000;
+const app = express();
+
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+
+http.createServer(app).listen(port, () => console.log(`Listening on port ${port}`));
