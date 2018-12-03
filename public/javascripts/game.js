@@ -24,13 +24,13 @@ class Cell {
 
 var Board = function () {
     // Initialize 8x8 matrix of Cells 
-    this.board = Array(...Array(8)).map((a, y) => Array(...Array(8)).map((b, x) => new Cell(x, y, CELL_EMPTY)));
+    this.board = Array(...Array(8)).map((a, y) => Array(...Array(8)).map((b, x) => new Cell(x, y, this.CELL_EMPTY)));
 
     // Initialization of the first 4 disks
-    board[3][3].setValue(CELL_WHITE);
-    board[3][4].setValue(CELL_BLACK);
-    board[4][3].setValue(CELL_BLACK);
-    board[4][4].setValue(CELL_WHITE);
+    this.board[3][3].setValue(this.CELL_WHITE);
+    this.board[3][4].setValue(this.CELL_BLACK);
+    this.board[4][3].setValue(this.CELL_BLACK);
+    this.board[4][4].setValue(this.CELL_WHITE);
 
 };
 
@@ -102,7 +102,7 @@ Board.prototype.placeDisk = function placeDisk(player, position) {
 };
 
 /**
- *
+ *  
  * @param {*} player
  * @param {*} cell
  */
