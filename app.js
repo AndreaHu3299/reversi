@@ -14,4 +14,49 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-http.createServer(app).listen(port, () => console.log(`Listening on port ${port}`));
+app.get("/splash", indexRouter);
+app.get("/play", indexRouter);
+
+var server = http.createServer(app);
+const wss = new websocket.Server({
+  server
+});
+
+var websockets = {};
+
+/*
+ * regularly clean up the websockets object
+ */
+setInterval(function () {
+  for (let i in websockets) {
+    if (websockets.hasOwnProperty(i)) {
+      let gameObj = websockets[i];
+      //if the gameObj has a final status, the game is complete/aborted
+      if (gameObj.finalStatus != null) {
+        console.log("\tDeleting element " + i);
+        delete websockets[i];
+      }
+    }
+  }
+}, 50000);
+
+var currentGame = new Game(gameStatus.gamesOnGoing++);
+var connectionID = 0; //each websocket receives a unique ID
+
+wss.on("connection", (ws) => {
+  let con = ws;
+  con.id = connectionID++;
+  let playerType = currentGame.addPlayer(con);
+  websockets[con.id] = currentGame;
+
+  console.log(`Player ${con.id} placed in game ${currentGame.id} as ${playerType}`);
+
+  /*
+   * inform the client about its assigned player type
+   */
+  con.send((playerType == "WHITE") ? messages.S_PLAYER_A : messages.S_PLAYER_B);
+
+
+});
+
+server.listen(port, () => console.log(`Listening on port ${port}`));

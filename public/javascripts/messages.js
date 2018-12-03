@@ -20,8 +20,15 @@
     /*
      * Server to client: choose target word
      */
-    exports.O_CHOOSE = {"type": "CHOOSE-WORD"};
-    exports.S_CHOOSE = JSON.stringify(exports.O_CHOOSE);
+    exports.O_TURN_WHITE = {
+        "type": "TURN-WHITE"
+    };
+    exports.S_TURN_WHITE = JSON.stringify(exports.O_TURN_WHITE);
+
+    exports.O_TURN_BLACK = {
+        "type": "TURN-BLACK"
+    };
+    exports.S_TURN_BLACK = JSON.stringify(exports.O_TURN_BLACK);
 
     /*
      * Server to client: set as player white
@@ -31,16 +38,16 @@
         "type": exports.T_PLAYER_TYPE,
         "data": "WHITE"
     };
-    exports.S_PLAYER_A = JSON.stringify(exports.O_PLAYER_A);
+    exports.S_PLAYER_WHITE = JSON.stringify(exports.O_PLAYER_WHITE);
 
     /*
      * Server to client: set as player black
      */
-    exports.O_PLAYER_B = {
+    exports.O_PLAYER_BLACK = {
         "type": exports.T_PLAYER_TYPE,
         "data": "BLACK"
     };
-    exports.S_PLAYER_B = JSON.stringify(exports.O_PLAYER_B);
+    exports.S_PLAYER_BLACK = JSON.stringify(exports.O_PLAYER_BLACK);
 
     /*
      * Player to server: send 
@@ -60,7 +67,6 @@
         "type": exports.T_GAME_OVER,
         "data": null
     };
-
 
 }(typeof exports === "undefined" ? this.Messages = {} : exports));
 // If exports is undefined, we are on the client; else the server
