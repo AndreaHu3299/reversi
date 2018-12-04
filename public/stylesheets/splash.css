@@ -28,11 +28,11 @@
 }
 
 #buttons{
-    grid-area: buttons；
+    grid-area: buttons;
     display: grid;
     height: 50%;
     width: 50%;
-    margin-top: 10% 
+    margin-top: 10%;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
     "play"
