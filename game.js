@@ -1,9 +1,10 @@
 /* e*/
+const Board = require("./public/javascripts/board");
 var Game = function (GameId) {
   this.playerWHite = null;
   this.playerBlack = null;
   this.id = GameId;
-  this.board = null;
+  this.board = new Board;
   this.GameState = "0 JOINED";
 };
 

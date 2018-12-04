@@ -6,117 +6,117 @@
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
     <link rel="stylesheet" href="stylesheets/game.css" />
-    <script src="javascripts/jquery.3.3.1.js"></script>
-    <script src="javascripts/game.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="javascripts/board.js"></script>
     <title>Reversi Online</title>
 </head>
 
 <body>
     <div id="background">
         <div id="player1Sidebar" class="player_sidebar player1">
-            <img src="images/blank-profile-picture.png" class="profileImage">
+            <img src="images/icons/userIconBig.svg" class="profileImage">
             <span if="player1Username" class="playerUsernameText">You</span>
             <div class="disk disk_white sidebarDisk"></div>
             <span id="player1DiskCount" class="infoText">2</span>
-            <img src="images/clockIcon.png" class="clockIcon" />
+            <img src="images/icons/clockIcon.svg" class="clockIcon" />
             <span id="player1Timer" class="infoText">00:12</span>
         </div>
         <div id="gameBoard">
             <!--row 1-->
-            <div id="cell_a1" class="cell"></div>
-            <div id="cell_b1" class="cell"></div>
-            <div id="cell_c1" class="cell"></div>
-            <div id="cell_d1" class="cell"></div>
-            <div id="cell_e1" class="cell"></div>
-            <div id="cell_f1" class="cell"></div>
-            <div id="cell_g1" class="cell"></div>
-            <div id="cell_h1" class="cell"></div>
+            <div id="cell_a1" class="cell" data-cellCoord="a1"></div>
+            <div id="cell_b1" class="cell" data-cellCoord="b1"></div>
+            <div id="cell_c1" class="cell" data-cellCoord="c1"></div>
+            <div id="cell_d1" class="cell" data-cellCoord="d1"></div>
+            <div id="cell_e1" class="cell" data-cellCoord="e1"></div>
+            <div id="cell_f1" class="cell" data-cellCoord="f1"></div>
+            <div id="cell_g1" class="cell" data-cellCoord="g1"></div>
+            <div id="cell_h1" class="cell" data-cellCoord="h1"></div>
             <!--row 2-->
-            <div id="cell_a2" class="cell"></div>
-            <div id="cell_b2" class="cell"></div>
-            <div id="cell_c2" class="cell"></div>
-            <div id="cell_d2" class="cell"></div>
-            <div id="cell_e2" class="cell"></div>
-            <div id="cell_f2" class="cell"></div>
-            <div id="cell_g2" class="cell"></div>
-            <div id="cell_h2" class="cell"></div>
+            <div id="cell_a2" class="cell" data-cellCoord="a2"></div>
+            <div id="cell_b2" class="cell" data-cellCoord="b2"></div>
+            <div id="cell_c2" class="cell" data-cellCoord="c2"></div>
+            <div id="cell_d2" class="cell" data-cellCoord="d2"></div>
+            <div id="cell_e2" class="cell" data-cellCoord="e2"></div>
+            <div id="cell_f2" class="cell" data-cellCoord="f2"></div>
+            <div id="cell_g2" class="cell" data-cellCoord="g2"></div>
+            <div id="cell_h2" class="cell" data-cellCoord="h2"></div>
             <!--row 3-->
-            <div id="cell_a3" class="cell"></div>
-            <div id="cell_b3" class="cell"></div>
-            <div id="cell_c3" class="cell"></div>
-            <div id="cell_d3" class="cell"></div>
-            <div id="cell_e3" class="cell">
+            <div id="cell_a3" class="cell" data-cellCoord="a3"></div>
+            <div id="cell_b3" class="cell" data-cellCoord="b3"></div>
+            <div id="cell_c3" class="cell" data-cellCoord="c3"></div>
+            <div id="cell_d3" class="cell" data-cellCoord="d3"></div>
+            <div id="cell_e3" class="cell" data-cellCoord="e3">
                 <div class="disk disk_white diskHint"></div>
             </div>
-            <div id="cell_f3" class="cell"></div>
-            <div id="cell_g3" class="cell"></div>
-            <div id="cell_h3" class="cell"></div>
+            <div id="cell_f3" class="cell" data-cellCoord="f3"></div>
+            <div id="cell_g3" class="cell" data-cellCoord="g3"></div>
+            <div id="cell_h3" class="cell" data-cellCoord="h3"></div>
             <!--row 4-->
-            <div id="cell_a4" class="cell"></div>
-            <div id="cell_b4" class="cell"></div>
-            <div id="cell_c4" class="cell"></div>
-            <div id="cell_d4" class="cell">
+            <div id="cell_a4" class="cell" data-cellCoord="a4"></div>
+            <div id="cell_b4" class="cell" data-cellCoord="b4"></div>
+            <div id="cell_c4" class="cell" data-cellCoord="c4"></div>
+            <div id="cell_d4" class="cell" data-cellCoord="d4">
                 <div class="disk disk_white"></div>
             </div>
-            <div id="cell_e4" class="cell">
+            <div id="cell_e4" class="cell" data-cellCoord="e4">
                 <div class="disk disk_black"></div>
             </div>
-            <div id="cell_f4" class="cell">
+            <div id="cell_f4" class="cell" data-cellCoord="f4">
                 <div class="disk disk_white diskHint"></div>
             </div>
-            <div id="cell_g4" class="cell"></div>
-            <div id="cell_h4" class="cell"></div>
+            <div id="cell_g4" class="cell" data-cellCoord="g4"></div>
+            <div id="cell_h4" class="cell" data-cellCoord="h4"></div>
             <!--row 5-->
-            <div id="cell_a5" class="cell"></div>
-            <div id="cell_b5" class="cell"></div>
-            <div id="cell_c5" class="cell">
+            <div id="cell_a5" class="cell" data-cellCoord="a5"></div>
+            <div id="cell_b5" class="cell" data-cellCoord="b5"></div>
+            <div id="cell_c5" class="cell" data-cellCoord="c5">
                 <div class="disk disk_white diskHint"></div>
             </div>
-            <div id="cell_d5" class="cell">
+            <div id="cell_d5" class="cell" data-cellCoord="d5">
                 <div class="disk disk_black"></div>
             </div>
-            <div id="cell_e5" class="cell">
+            <div id="cell_e5" class="cell" data-cellCoord="e5">
                 <div class="disk disk_white"></div>
             </div>
-            <div id="cell_f5" class="cell"></div>
-            <div id="cell_g5" class="cell"></div>
-            <div id="cell_h5" class="cell"></div>
+            <div id="cell_f5" class="cell" data-cellCoord="f5"></div>
+            <div id="cell_g5" class="cell" data-cellCoord="g5"></div>
+            <div id="cell_h5" class="cell" data-cellCoord="h5"></div>
             <!--row 6-->
-            <div id="cell_a6" class="cell"></div>
-            <div id="cell_b6" class="cell"></div>
-            <div id="cell_c6" class="cell"></div>
-            <div id="cell_d6" class="cell">
+            <div id="cell_a6" class="cell" data-cellCoord="a6"></div>
+            <div id="cell_b6" class="cell" data-cellCoord="b6"></div>
+            <div id="cell_c6" class="cell" data-cellCoord="c6"></div>
+            <div id="cell_d6" class="cell" data-cellCoord="d6">
                 <div class="disk disk_white diskHint"></div>
             </div>
-            <div id="cell_e6" class="cell"></div>
-            <div id="cell_f6" class="cell"></div>
-            <div id="cell_g6" class="cell"></div>
-            <div id="cell_h6" class="cell"></div>
+            <div id="cell_e6" class="cell" data-cellCoord="e6"></div>
+            <div id="cell_f6" class="cell" data-cellCoord="f6"></div>
+            <div id="cell_g6" class="cell" data-cellCoord="g6"></div>
+            <div id="cell_h6" class="cell" data-cellCoord="h6"></div>
             <!--row 7-->
-            <div id="cell_a7" class="cell"></div>
-            <div id="cell_b7" class="cell"></div>
-            <div id="cell_c7" class="cell"></div>
-            <div id="cell_d7" class="cell"></div>
-            <div id="cell_e7" class="cell"></div>
-            <div id="cell_f7" class="cell"></div>
-            <div id="cell_g7" class="cell"></div>
-            <div id="cell_h7" class="cell"></div>
+            <div id="cell_a7" class="cell" data-cellCoord="a7"></div>
+            <div id="cell_b7" class="cell" data-cellCoord="b7"></div>
+            <div id="cell_c7" class="cell" data-cellCoord="c7"></div>
+            <div id="cell_d7" class="cell" data-cellCoord="d7"></div>
+            <div id="cell_e7" class="cell" data-cellCoord="e7"></div>
+            <div id="cell_f7" class="cell" data-cellCoord="f7"></div>
+            <div id="cell_g7" class="cell" data-cellCoord="g7"></div>
+            <div id="cell_h7" class="cell" data-cellCoord="h7"></div>
             <!--row 8-->
-            <div id="cell_a8" class="cell"></div>
-            <div id="cell_b8" class="cell"></div>
-            <div id="cell_c8" class="cell"></div>
-            <div id="cell_d8" class="cell"></div>
-            <div id="cell_e8" class="cell"></div>
-            <div id="cell_f8" class="cell"></div>
-            <div id="cell_g8" class="cell"></div>
-            <div id="cell_h8" class="cell"></div>
+            <div id="cell_a8" class="cell" data-cellCoord="a8"></div>
+            <div id="cell_b8" class="cell" data-cellCoord="b8"></div>
+            <div id="cell_c8" class="cell" data-cellCoord="c8"></div>
+            <div id="cell_d8" class="cell" data-cellCoord="d8"></div>
+            <div id="cell_e8" class="cell" data-cellCoord="e8"></div>
+            <div id="cell_f8" class="cell" data-cellCoord="f8"></div>
+            <div id="cell_g8" class="cell" data-cellCoord="g8"></div>
+            <div id="cell_h8" class="cell" data-cellCoord="h8"></div>
         </div>
         <div id="player2Sidebar" class="player_sidebar player2">
-            <img src="images/blank-profile-picture.png" class="profileImage">
+            <img src="images/icons/userIconBig.svg" class="profileImage">
             <span id="player2Username" class="playerUsernameText">Opponent</span>
             <div class="disk disk_black sidebarDisk"></div>
             <span id="player2DiskCount" class="infoText">2</span>
-            <img src="images/clockIcon.png" class="clockIcon" />
+            <img src="images/icons/clockIcon.svg" class="clockIcon" />
             <span id="player2Timer" class="infoText">00:00</span>
         </div>
 

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke-width: 6px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #707070;
+      }
+
+      .cls-2 {
+        fill: #707070;
+        stroke-width: 2px;
+      }
+
+      .cls-3, .cls-5 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke-width: 3px;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="clock_icon" data-name="clock icon" transform="translate(-118 -450)">
+    <g id="Ellipse_7" data-name="Ellipse 7" class="cls-1" transform="translate(118 450)">
+      <circle class="cls-4" cx="32" cy="32" r="32"/>
+      <circle class="cls-5" cx="32" cy="32" r="29"/>
+    </g>
+    <g id="Ellipse_8" data-name="Ellipse 8" class="cls-2" transform="translate(148.5 480)">
+      <circle class="cls-4" cx="2" cy="2" r="2"/>
+      <circle class="cls-5" cx="2" cy="2" r="3"/>
+    </g>
+    <line id="Line_1" data-name="Line 1" class="cls-3" y1="22" transform="translate(150.5 459.5)"/>
+    <line id="Line_2" data-name="Line 2" class="cls-3" y1="16" transform="translate(161.571 494.926) rotate(140)"/>
+  </g>
+</svg>
