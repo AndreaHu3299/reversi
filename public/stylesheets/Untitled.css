@@ -172,13 +172,12 @@
     position:relative; 
     /* box-shadow:3px 3px 10px #666; */
     overflow:hidden;
-    float:left;
 }
 
 .auto-visible img{
     width:50px;
     height:50px;
-    right:-195px;
+    right:-313px;
     position: relative;
     -webkit-transition:right 0.5s ease;
     float: left;
@@ -210,7 +209,7 @@
     -webkit-transition:right 1s ease;
 }
 
-.auto-visible:hover img{right:-52px;}
+.auto-visible:hover img{right:-22px;}
 
 .auto-visible:hover span{right:0px;}
 
