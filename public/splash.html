@@ -2,56 +2,79 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="styles/splash.css"/>
+        <link rel="stylesheet" href="stylesheets/Untitled.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+        <script>
+            $("#instructions").unbind("onclick").click(
+                function() {
+                    $(".instructionPage").dialog();
+                }
+            )
+        </script>
         <title> Reversi Online </title>
     </head>
-
     <body>
         <main>
             <div id="background">
-                <section id="logo">
-                    <img src="images/logo.png" alt="logo">
-                </section>
-
-                <section id="buttons">
-                    <button type="button" class="play"> 
-                        <div id="play" style="color:white">
-                            <h1>Play</h1>
-                        </div>
+                
+                <img src="images/logo.png" alt="logo" class="logo">
+    
+                <div class="buttons">
+                    <button type="button" id="play" class="buttons"> 
+                        <h1 id="play">Play</h1>
                     </button>
-                    
-                    <button type="button" class="instructions"> 
-                        <div id="instructions" style="color:white">
-                            <h1>Instructions</h1>
-                        </div> 
+     
+                    <button type="button" id="instructions" class="buttons" > 
+                        <h1 id="instructions" >Instructions</h1>
                     </button>
-                </section>
+                </div>
 
-                <section id="statistics">
-                    <div class="pastVisitor">
-                        <img src="" alt="eye_pc">
-                        <div id="pastVisitorNumber">
-                            <h1> number </h1>
-                            <h2> past visitors </h1>
-                        </div> 
+                <div class="instructionPage">
+                    <head id="instructionTitle"> Instructions </head>
+                    <body id="instructionText">
+                        <p>1. The board always starts with 2 white disks and 2 black disks placed across each other (as the picture below).
+                            The player with black disk goes first.</p>
+                        <p>2. The black disk must be placed where there exists at least one straight (horizontal, vertical, or diagonal) 
+                            occupied line between the new disk and another black disk, with one or more contiguous white disks between them (as seen below).</p>
+                        <p>3. The black disk must be placed where there exists at least one straight (horizontal, vertical, or diagonal) occupied line between the new disk and another black disk, 
+                            with one or more contiguous white disks between them (as seen below).</p>
+                        <p>4. Next, it is the turn for the player with white disk. </p>
+                        <p>5. The rule for the player with white disk of placing the disk is the same with instruction 3. </p>
+                        <p>6. Next, it is the turn for the player with black disk. If one player is unable to connect an occupied line with the disk with the color assigned to him/her on the other side, play passes back to the other player. Shifts goes on and on. 
+                            When neither player can move, the game ends. At the end of the game, the player with the most pieces on the board wins.</p>
+                        <p>Hint: the grids with dark shadow on the board will be the possible places to place a disk. </p>
+                    </body>
+                </div>
+                
+                <div class="statistics">
+                    <div class="auto-visible pastVisitor">
+                        <img src="images/icons/eyeIcon.svg" alt="eye_pc" class="animage eyePc">
+                        <span>
+                            <h1 id="pastVisitorNumber"> 0 </h1>
+                            <h1> past visitors </h1>
+                        </span> 
                     </div>
                 
-                    <div class="ongoingGames">
-                        <img src="" alt="board_pc">
-                        <div id="ongoingGamesNumber">
-                            <h1> number </h1>
-                            <h2> ongoing games </h1>
-                        </div> 
+                    <div class="auto-visible ongoingGames">
+                        <img src="images/icons/GameIcon.svg" alt="board_pc" class="animage boardPc">
+                        <span>
+                            <h1 id="ongoingGamesNumber">0</h1>
+                            <h1>ongoing games</h1>
+                        </span>
                     </div>
 
-                    <div class="playersOnline">
-                        <img src="" alt="people_pc">
-                        <div id="playersOnlineNumber">
-                            <h1> number </h1>
-                            <h2> players online </h1>
-                        </div> 
+                    <div class="auto-visible playersOnline">
+                        <img src="images/icons/playersIcon.svg" alt="people_pc" class="animage peoplePc">
+                        <span>
+                            <h1 id="playersOnlineNumber"> 0 </h1>
+                            <h1> players online </h1>
+                        </span>
                     </div>
-                </section>
+                </div>
             </div>
         </main>
     </body>

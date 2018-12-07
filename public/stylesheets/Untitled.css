@@ -1,0 +1,217 @@
+* { 
+  background-color: #426952;
+  margin: 0;
+  height: 100%;
+}
+
+#background{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
+    grid-template-columns: 30%, 40%, 30%;
+    grid-template-rows: 100px, 300px; 
+    grid-template-areas: 
+        "1 logo 2"
+        "3 buttons statistics";
+}
+
+.logo{
+    grid-area: logo;
+    width: 450px;
+    height: 150px;
+    position: relative;
+    top: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo::before{
+    content: url(../images/icons/hand.svg);
+    width: 50px;
+    height: 50px;
+}
+
+.buttons{
+    grid-area: buttons;
+    position: relative;
+    top: 50px;
+    width: 200px;
+    height: 60px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#instructions{
+    color: white;
+    background-color: green;
+    /* position: relative;
+    top:30%; */
+}
+
+#instructions:hover{
+    background-color: greenyellow;
+}
+
+
+#instructions:active{
+    background-color: yellow;
+}
+
+#play{
+    color: white;
+    background-color: green;
+    /* position: relative;
+    top:30%; */
+}
+
+#play:hover{
+    background-color: greenyellow;
+}
+
+#play:active{
+    background-color: yellow;
+}
+
+.instructionPage{
+    display: none;
+    background-color: #426952;
+    border: 2px;
+    border-color: white;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 100px;
+    left: 100px
+}
+
+.statistics{
+    grid-area: statistics;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 30%, 30%, 30%;
+    grid-template-columns: repeat(30%);
+    grid-template-areas: 
+        "pastVisitor"
+        "ongoingGames"
+        "playersOnline";
+}
+
+@keyframes jump{
+    from {top:53px;}
+    to {top:50px;}
+  }
+ 
+.eyePc{
+    grid-area: pastVisitor;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+}
+
+.animage{
+    overflow: auto;
+    position: relative;
+    animation-name:jump;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+}
+
+.boardPc{
+    grid-area: ongoingGames;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    overflow: auto;
+    position: relative;
+    animation-name:jump;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+ 
+.peoplePc{
+    grid-area: playersOnline;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    overflow: auto;
+    position: relative;
+    animation-name:jump;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.sometext a span{
+    display: none;
+}
+.sometext a:hover span{
+    display: block;
+}
+
+.pastVisitorNumber{
+    display:none;
+}
+
+.ongoingGamesNumber{
+    display:none;
+}
+
+.playersOnlineNumber{
+    display:none;
+}
+.auto-visible{
+    width: 100%;
+    height:100px; 
+    float:right; 
+    position:relative; 
+    /* box-shadow:3px 3px 10px #666; */
+    overflow:hidden;
+    float:left;
+}
+
+.auto-visible img{
+    width:50px;
+    height:50px;
+    right:-195px;
+    position: relative;
+    -webkit-transition:right 0.5s ease;
+    float: left;
+}
+
+.auto-visible span{
+    width:140px; 
+    height:25px; 
+    /* background:#333; */
+    position:absolute;
+    right:-300px;
+    top:50px;
+    filter:Alpha(opacity=80);
+    -moz-opacity: 0.8; 
+    opacity: 0.8; 
+    padding:2px; 
+    -webkit-transition:right 0.5s ease;
+    float:left;
+}
+
+.auto-visible span h1{
+    height:25px; 
+    color:#000;
+    background-color: #fff; 
+    font-size:18px;
+    text-align:center; 
+    position:relative;
+    right:-300px; 
+    -webkit-transition:right 1s ease;
+}
+
+.auto-visible:hover img{right:-52px;}
+
+.auto-visible:hover span{right:0px;}
+
+.auto-visible:hover span h1{right:0px;}
