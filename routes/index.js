@@ -8,7 +8,7 @@ router.get("/", function (req, res) {
 
 /* Pressing the 'PLAY' button, returns this page */
 router.get("/play", function(req, res) {
-  res.sendFile("game.html", {root: "./public"});
+  res.sendFile("game.html", {root: "./public/stylesheets"});
 });
 
 module.exports = router;
