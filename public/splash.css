@@ -1,5 +1,6 @@
-* {
+body {
     margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
     background-color: #426952;
@@ -10,7 +11,7 @@
     justify-items: center;
     grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
     grid-template-rows: 6fr 5fr 5fr;
-    grid-template-areas: 
+    grid-template-areas:
         "blankSpace logo blankSpace"
         "blankSpace logo blankSpace"
         "blankSpace buttons blankSpace"
@@ -27,7 +28,7 @@
     margin-top: 25%;
 }
 
-#buttons{
+#buttons {
     grid-area: buttons;
     display: grid;
     height: 50%;
@@ -35,12 +36,12 @@
     margin-top: 10%;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "play"
-    "instructions";
+        "play"
+        "instructions";
     grid-gap: 10vh;
 }
 
-.play{
+.play {
     grid-area: play;
     background-color: green;
     border-radius: 12px;
@@ -50,17 +51,17 @@
     font-size: 30px;
 }
 
-.play:hover{ 
+.play:hover {
     grid-area: play;
     background-image: linear-gradient(to bottom right, green yellow);
 }
 
-.play:active{
+.play:active {
     grid-area: play;
     background-color: yellow;
 }
 
-.instructions{
+.instructions {
     grid-area: instructions;
     background-color: green;
     border-radius: 12px;
@@ -70,17 +71,17 @@
     font-size: 30px;
 }
 
-.instructions:hover{
+.instructions:hover {
     grid-area: instructions;
     background-image: linear-gradient(to bottom right, green yellow);
 }
 
-.instructions:active{
+.instructions:active {
     grid-area: instructions;
     background-color: yellow;
 }
 
-#statistics{
+#statistics {
     grid-area: statistics;
     background-color: white;
     box-shadow: 0px 4px 8px 0px;
@@ -88,45 +89,45 @@
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 5px;
     grid-template-areas:
-    "pastVisitor"
-    "ongoingGames"
-    "playerOnline"
+        "pastVisitor"
+        "ongoingGames"
+        "playerOnline"
 }
 
-.pastVisitor{
+.pastVisitor {
     grid-area: pastVisitor;
     float: right;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "eye_pc pastVistorNumber";
+        "eye_pc pastVistorNumber";
     grid-gap: 10%;
 }
 
 .pastVisitor::before {
-    content: img src=
-    height: 14px;
+    content: img src=height: 14px;
     width: 14px;
     margin-top: 5%;
     margin-bottom: 5%
 }
+
 .pastVisitor::after {
-    content: 
-    height: 14px;
+    content:
+        height: 14px;
     width: 14px;
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-.ongoingGames{
+.ongoingGames {
     grid-area: ongoingGames;
     float: right;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "board_pc ongoingGamesNumber";
+        "board_pc ongoingGamesNumber";
     grid-gap: 10%;
 }
 
-#board_pc{
+#board_pc {
     grid-area: board_pc;
     height: 14px;
     width: 14px;
@@ -134,7 +135,7 @@
     margin-bottom: 5%;
 }
 
-#ongoingGamesNumber{
+#ongoingGamesNumber {
     grid-area: ongoingGamesNumber;
     height: 14px;
     width: 14px;
@@ -142,21 +143,21 @@
     margin-bottom: 5%;
 }
 
-.playersOnline{
+.playersOnline {
     grid-area: playersOnline;
     float: right;
 }
 
-.playersOnline:hover{
+.playersOnline:hover {
     grid-area: playersOnline;
     float: right;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "people_pc playersOnlineNumber";
+        "people_pc playersOnlineNumber";
     grid-gap: 10%;
 }
 
-#board_pc{
+#board_pc {
     grid-area: people_pc;
     height: 14px;
     width: 14px;
@@ -164,18 +165,10 @@
     margin-bottom: 5%;
 }
 
-#playersOnlineNumber{
+#playersOnlineNumber {
     grid-area: playersOnlineNumber;
     height: 14px;
     width: 14px;
     margin-top: 5%;
     margin-bottom: 5%;
 }
-
-
-
-
-
-
-
-    
