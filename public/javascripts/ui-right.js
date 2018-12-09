@@ -10,18 +10,18 @@ function Board() {
                 Board.prototype.CELL_WHITE_HINT = 3;
                 Board.prototype.CELL_BLACK_HINT = 2;
                 switch (disk.value) {
-                    case 1: //cell white
-                    case 3:
-                        classes.push("disk_white");
-                        if (disk.value === 3) classes.push("diskHint");
-                        break;
-                    case 2: //cell black
-                    case 4:
-                        classes.push("disk_black");
-                        if (disk.value === 4) classes.push("diskHint");
-                        break;
-                    default: //fallback
-                        classes.push("hidden");
+                case 1: //cell white
+                case 3:
+                    classes.push("disk_white");
+                    if (disk.value === 3) classes.push("diskHint");
+                    break;
+                case 2: //cell black
+                case 4:
+                    classes.push("disk_black");
+                    if (disk.value === 4) classes.push("diskHint");
+                    break;
+                default: //fallback
+                    classes.push("hidden");
                 }
                 this.board.children[disk.y * 8 + disk.x].className = classes.join(" ");
             });
@@ -38,7 +38,7 @@ function PlayerWhite() {
 
     this.startCounter = function() {
         this.timer = setInterval(myClock, 1000);
-        let c = ;
+        let c = 10;
         function myClock() {
             this.timerDisplay.innerHTML = --c;
             if (c == 0) {
@@ -46,7 +46,7 @@ function PlayerWhite() {
                 alert("Reached zero");
             }
         }
-    }
+    };
 
     this.startCounter = function () {
         timer.set
