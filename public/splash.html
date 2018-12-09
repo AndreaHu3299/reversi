@@ -22,10 +22,6 @@
                 }
             }
         }
-
-        function playGame() {
-            document.getElementById("playButtonForm").submit();
-        }
     </script>
     <title> Reversi Online </title>
 </head>
@@ -36,8 +32,8 @@
         <img src="images/logo.png" alt="logo" class="logo">
 
         <div class="buttons">
-            <form id="playButtonForm" action="/play">
-                <button type="button" onclick="playGame()" id="play" class="buttons">
+            <form action="/play" method="get">
+                <button type="submit" id="play" class="buttons">
                     Play
                 </button>
             </form>
