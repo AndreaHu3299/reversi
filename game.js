@@ -4,7 +4,7 @@ var Game = function (GameId) {
   this.playerWHite = null;
   this.playerBlack = null;
   this.id = GameId;
-  this.board = new Board;
+  this.board = new Board();
   this.GameState = "0 JOINED";
 };
 
@@ -35,10 +35,10 @@ Game.prototype.transitionMatrix = [
 
 Game.prototype.isValidTransition = function (from, to) {
 
-  console.assert(typeof from == "string", "%s: Expecting a string, got a %s", arguments.callee.name, typeof from);
-  console.assert(typeof to == "string", "%s: Expecting a string, got a %s", arguments.callee.name, typeof to);
-  console.assert(from in Game.prototype.transitionStates == true, "%s: Expecting %s to be a valid transition state", arguments.callee.name, from);
-  console.assert(to in Game.prototype.transitionStates == true, "%s: Expecting %s to be a valid transition state", arguments.callee.name, to);
+  console.assert(typeof from == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof from}`);
+  console.assert(typeof to == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof to}`);
+  console.assert(from in Game.prototype.transitionStates == true, `${arguments.callee.name}: Expecting ${from} to be a valid transition state`);
+  console.assert(to in Game.prototype.transitionStates == true, `${arguments.callee.name}: Expecting ${to} to be a valid transition state`);
 
 
   let i, j;

@@ -80,6 +80,10 @@
     border: cadetblue solid 3px;
 }
 
+.hidden { 
+    display: none;
+}
+
 .cell {
     height: 100%;
     width: 100%;
