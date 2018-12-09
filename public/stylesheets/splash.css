@@ -79,12 +79,12 @@
   .instructionPage{
       display: none;
       opacity:0.95;
-      background-color: white;
-      width: 60%;
-      height: 70%;
-      position: absolute;
+      background-color:grey;
+      width: 100%;
+      height: 100%;
+      /* position: absolute;
       top: 20%;
-      left: 20%;
+      left: 20%; */
       overflow:auto;
       border-radius: 10px;
       line-height: 180%;
@@ -92,6 +92,7 @@
   
   .instructionPageContent{
       text-align: center;
+      background-color: green;
       color:white;
       font-size: 10px;
       margin: 9%;

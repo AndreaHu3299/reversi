@@ -7,9 +7,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         window.onload = function(e) {
-            var instructionButton = document.getElementById("instructions");
+            var instructionButton = document.getElementById('instructions');
             var instructionPage=document.getElementById('instructionPage');
-            var close=document.getElementById("close");
+            var close=document.getElementById('close');
+            var play=document.getElementById('play');
+            play.onclick=function(){
+                require("router");
+            }
             instructionButton.onclick = function(){
                 instructionPage.style.display="block";
             }
@@ -33,8 +37,8 @@
             <img src="images/logo.png" alt="logo" class="logo">
 
             <div class="buttons">
-                <button type="button" id="play" class="buttons">
-                    Play
+                <button type="button" id="play" class="buttons" >
+                    Play 
                 </button>
 
                 <button type="button" id="instructions" class="buttons">
