@@ -9,7 +9,7 @@
         window.onload = function(e) {
             var instructionButton = document.getElementById("instructions");
             var instructionPage=document.getElementById('instructionPage');
-            var close=document.getElementsByClassName("close")[0];
+            var close=document.getElementById("close");
             instructionButton.onclick = function(){
                 instructionPage.style.display="block";
             }
@@ -22,11 +22,6 @@
                 }
             }
         }
-        // $("#instructions").unbind("onclick").click(
-        //     function() {
-        //         $(".instructionPage").dialog();
-        //     }
-        // )
     </script>
     <title> Reversi Online </title>
 </head>
@@ -72,30 +67,24 @@
                     </span>
                 </div>
             </div>
-        </div>
-    </main>
-    <div id="instructionPage" class="instructionPage">
-        <div class="instructionPageContent">
-            <h1> Instructions </h1>
-            <p id="line1"> The board always starts with 2 white disks and 2 black disks placed across each other (as
-                the picture below).
-                The player with black disk goes first.</p>
-            <p>2. The black disk must be placed where there exists at least one straight (horizontal, vertical, or
-                diagonal)
-                occupied line between the new disk and another black disk, with one or more contiguous white disks
-                between them (as seen below).</p>
-            <p>3. The black disk must be placed where there exists at least one straight (horizontal, vertical, or
-                diagonal) occupied line between the new disk and another black disk,
-                with one or more contiguous white disks between them (as seen below).</p>
-            <p>4. Next, it is the turn for the player with white disk. </p>
-            <p>5. The rule for the player with white disk of placing the disk is the same with instruction 3. </p>
-            <p>6. Next, it is the turn for the player with black disk. If one player is unable to connect an occupied
-                line with the disk with the color assigned to him/her on the other side, play passes back to the other
-                player. Shifts goes on and on.
-                When neither player can move, the game ends. At the end of the game, the player with the most pieces on
-                the board wins.</p>
-            <p id="hint">Hint: </p>
-            <button type="button" class="close"> close; </button>
+            <div id="instructionPage" class="instructionPage">
+                <div class="instructionPageContent">
+                    <h1 id="instructionTitle"> Instructions </h1>
+                    <h1 id="line1"> The board always starts with 2 white disks and 2 black disks placed across each other.
+                                The player with black disk goes first.<br/>
+                    2. The black disk must be placed where there exists at least one straight (horizontal, vertical, or diagonal) 
+                                occupied line between the new disk and another black disk, with one or more contiguous white disks between them.<br/>
+                    3. The black disk must be placed where there exists at least one straight (horizontal, vertical, or diagonal) occupied line between the new disk and another black disk, 
+                                with one or more contiguous white disks between them.<br/>
+                    4. Next, it is the turn for the player with white disk. <br/>
+                    5. The rule for the player with white disk of placing the disk is the same with instruction 3. <br/>
+                    6. Next, it is the turn for the player with black disk. If one player is unable to connect an occupied line with the disk with the color assigned to him/her on the other side, play passes back to the other player. Shifts goes on and on. 
+                                When neither player can move, the game ends. At the end of the game, the player with the most pieces on the board wins.<br/>
+                    </h1>
+                    <h2 id="hint"> Hint: </h2>
+                    <button type="button" id="close"> Close </button>
+                </div> 
+            </div>
         </div>
     </div>
 </body>
