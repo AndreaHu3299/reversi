@@ -10,10 +10,6 @@
             var instructionButton = document.getElementById('instructions');
             var instructionPage=document.getElementById('instructionPage');
             var close=document.getElementById('close');
-            var play=document.getElementById('play');
-            play.onclick=function(){
-                require("router");
-            }
             instructionButton.onclick = function(){
                 instructionPage.style.display="block";  //fixed is better
             }
@@ -26,6 +22,10 @@
                 }
             }
         }
+
+        function playGame() {
+            document.getElementById("playButtonForm").submit();
+        }
     </script>
     <title> Reversi Online </title>
 </head>
@@ -35,17 +35,12 @@
 
         <img src="images/logo.png" alt="logo" class="logo">
 
-<<<<<<< HEAD
         <div class="buttons">
-            <button type="button" id="play" class="buttons">
-                Play
-            </button>
-=======
-            <div class="buttons">
-                <button type="button" id="play" class="buttons" >
-                    Play 
+            <form id="playButtonForm" action="/play">
+                <button type="button" onclick="playGame()" id="play" class="buttons">
+                    Play
                 </button>
->>>>>>> bdc4c105f452b3f57b02325e0f6f5601695afc21
+            </form>
 
             <button type="button" id="instructions" class="buttons">
                 Instructions
@@ -83,7 +78,8 @@
                 <h1 id="line1"> The board always starts with 2 white disks and 2 black disks placed across each other.
                     The player with black disk goes first.<br />
                     2. The black disk must be placed where there exists at least one straight (horizontal, vertical, or
-                    diagonal) occupied line between the new disk and another black disk, with one or more contiguous white disks
+                    diagonal) occupied line between the new disk and another black disk, with one or more contiguous
+                    white disks
                     between them.<br />
                     3. The black disk must be placed where there exists at least one straight (horizontal, vertical, or
                     diagonal) occupied line between the new disk and another black disk,
