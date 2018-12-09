@@ -78,45 +78,55 @@
   
   .instructionPage{
       display: none;
-      opacity:0.4;
-      border: 2px;
-      border-color: white;
+      opacity:0.95;
       background-color: white;
-      width: 200px;
-      height: 200px;
-      position: relative;
-      top: 100px;
-      left: 100px;
+      width: 60%;
+      height: 70%;
+      position: absolute;
+      top: 20%;
+      left: 20%;
       overflow:auto;
+      border-radius: 10px;
   }
   
   .instructionPageContent{
-      color: black;
-      margin: 15% auto;
-      padding:20px;
+      text-align: center;
+      color:white;
+      font-size: 10px;
+      margin: 9%;
       width: 80%;
+      border-radius: 10px;
   }
   
+  #instructionTitle{
+      text-align: center;
+  }
+
   #line1::before{
       content: "1. ";
-      color: black;
+      color:white;
+      size: 10px;
   }
   
   #hint::after{
       content: "the grids with dark shadow on the board will be the possible places to place a disk.";
-      color: black;
+      color:white;
+      size: 10px;
   }
   
-  .close{
-      color: #426952;
+  #close{
+      color:white;
+      height: 50px;
+      width: 80px;
       float: right;
-      font-size: 30px;
+      font-size: 20px;
       font-weight: bold;
+      border-radius: 10px;
   }
   
   .close:hover,
   .closefocus{
-      color: white;
+      color: black;
       cursor:pointer;
   }
   
@@ -208,7 +218,7 @@
   .auto-visible img{
       width:50px;
       height:50px;
-      right:-295px;
+      float: right;
       position: relative;
       -webkit-transition:right 0.5s ease;   
   }
@@ -217,7 +227,7 @@
       width:140px; 
       height:25px; 
       /* background:#333; */
-      position:absolute;
+      position:relative;
       right:-300px;
       top:50px;
       filter:Alpha(opacity=80);
@@ -225,7 +235,7 @@
       opacity: 0.8; 
       padding:2px; 
       -webkit-transition:right 0.5s ease;
-      float:left;
+      float:right;
   }
   
   .auto-visible span h1{
@@ -234,13 +244,13 @@
       background-color: #fff; 
       font-size:18px;
       text-align:center; 
-      position:relative;
+      position: relative;
       right:-300px; 
       -webkit-transition:right 1s ease;
   }
   
-  .auto-visible:hover img{right:0px;}
+  .auto-visible:hover img{right:0;}
   
-  .auto-visible:hover span{right:0px;}
+  .auto-visible:hover span{right:0;}
   
-  .auto-visible:hover span h1{right:0px;}
+  .auto-visible:hover span h1{right:0;}
