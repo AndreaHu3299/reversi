@@ -7,9 +7,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         window.onload = function(e) {
-            var instructionButton = document.getElementById("instructions");
+            var instructionButton = document.getElementById('instructions');
             var instructionPage=document.getElementById('instructionPage');
-            var close=document.getElementById("close");
+            var close=document.getElementById('close');
+            var play=document.getElementById('play');
+            play.onclick=function(){
+                require("router");
+            }
             instructionButton.onclick = function(){
                 instructionPage.style.display="block";  //fixed is better
             }
@@ -31,10 +35,17 @@
 
         <img src="images/logo.png" alt="logo" class="logo">
 
+<<<<<<< HEAD
         <div class="buttons">
             <button type="button" id="play" class="buttons">
                 Play
             </button>
+=======
+            <div class="buttons">
+                <button type="button" id="play" class="buttons" >
+                    Play 
+                </button>
+>>>>>>> bdc4c105f452b3f57b02325e0f6f5601695afc21
 
             <button type="button" id="instructions" class="buttons">
                 Instructions
