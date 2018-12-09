@@ -82,9 +82,9 @@
       background-color:grey;
       width: 100%;
       height: 100%;
-      /* position: absolute;
-      top: 20%;
-      left: 20%; */
+      position: absolute;
+      top: 0%;
+      left: 0%; 
       overflow:auto;
       border-radius: 10px;
       line-height: 180%;
@@ -101,8 +101,10 @@
   }
   
   #instructionTitle{
-      border: 10%;
+      border: 200%;
+      height:100px;
       text-align: center;
+      size: 50px;
   }
 
   #line1::before{
@@ -112,6 +114,7 @@
   }
 
   #hint::after{
+      height: 50px;
       content: "the grids with dark shadow on the board will be the possible places to place a disk.";
       color:white;
       size: 10px;
