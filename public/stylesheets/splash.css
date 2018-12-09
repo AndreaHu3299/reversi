@@ -87,6 +87,7 @@
       left: 20%;
       overflow:auto;
       border-radius: 10px;
+      line-height: 180%;
   }
   
   .instructionPageContent{
@@ -99,6 +100,7 @@
   }
   
   #instructionTitle{
+      border: 10%;
       text-align: center;
   }
 
@@ -107,7 +109,7 @@
       color:white;
       size: 10px;
   }
-  
+
   #hint::after{
       content: "the grids with dark shadow on the board will be the possible places to place a disk.";
       color:white;
@@ -124,10 +126,8 @@
       border-radius: 10px;
   }
   
-  .close:hover,
-  .closefocus{
+  .close:hover{
       color: black;
-      cursor:pointer;
   }
   
   .statistics{
