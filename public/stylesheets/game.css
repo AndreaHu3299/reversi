@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    padding: 0;
     width: 100%;
     background-color: #426952;
 }
@@ -10,7 +9,7 @@ body {
     justify-items: center;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 14fr 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
         "playerOne board playerTwo"
         "playerOne board btnSettings"
         "playerOne board btnExit";
@@ -34,7 +33,7 @@ body {
     display: grid;
     grid-template-rows: 3fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 2fr;
-    grid-template-areas: 
+    grid-template-areas:
         "playerIcon playerIcon"
         "playerName playerName"
         "diskIcon diskCount"
@@ -81,7 +80,7 @@ body {
     border: cadetblue solid 3px;
 }
 
-.hidden { 
+.hidden {
     display: none;
 }
 
@@ -123,9 +122,9 @@ body {
     font-size: 2.5vw;
     color: #ffffff;
     display: flex;
-    justify-content:center;
-    align-content:center;
-    flex-direction:column;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;
 }
 
@@ -145,8 +144,114 @@ body {
     top: 0%;
     transform: none;
 }
+
 .clockIcon {
     margin: auto;
     width: 3.5vw;
     height: 3.5vw;
+}
+
+/* Loading icon */
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #222222;
+    opacity: 0.8;
+    z-index: 100;
+}
+
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
+
+#loader-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#coin {
+    z-index: 101;
+    position: relative;
+    margin: 0 auto;
+    top: 45%;
+    width: 6vw;
+    height: 6vw;
+    animation: flip 3s linear forwards;
+    animation-iteration-count: infinite;
+    transform-style: preserve-3d;
+}
+
+#coin div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    margin: auto;
+    box-shadow: 2px 2px 8px #2228;
+}
+
+.side-b {
+    transform: rotateY(-180deg);
+}
+
+@keyframes flip {
+    from {
+        transform: rotateY(0);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.saving {
+    font-size: 40px;
+}
+
+.saving span {
+    font-size: 50px;
+    animation-name: blink;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.saving span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.saving span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+#waitingText {
+    z-index: 101;
+    position: relative;
+    top: 45%;
+    text-align: center;
+    color: #fff;
+    font-family: monospace;
+    font-size: 2vw;
+}
+
+@keyframes blink {
+    0% {
+        opacity: .2;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .2;
+    }
 }

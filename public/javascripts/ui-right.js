@@ -32,29 +32,27 @@ function Board() {
 function PlayerWhite() {
     this.timer;
     this.timerDisplay = document.getElementById("player1Timer");
+
     this.updateDiskCount = function (numDisks) {
         console.assert(((typeof numDisks === "number" && (numDisks % 1) === 0)) || typeof disksList == "string", `Expecting an array, got a ${typeof disksList} instead`);
     };
 
     this.startCounter = function() {
         this.timer = setInterval(myClock, 1000);
-        let c = 10;
+        let c = Setup.TIMER_MAX_TIME;
         function myClock() {
             this.timerDisplay.innerHTML = --c;
             if (c == 0) {
                 clearInterval(this.timer);
-                alert("Reached zero");
+                alert("Player white Gameover!");
+                //TODO add gameover
             }
         }
     };
 
-    this.startCounter = function () {
-        timer.set
-    };
     this.stopCounter = function () {
-
+        clearInterval(this.timer);
     };
-
 }
 
 function PlayerBlack() {

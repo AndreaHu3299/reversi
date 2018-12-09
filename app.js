@@ -54,8 +54,7 @@ wss.on("connection", (ws) => {
   /*
    * inform the client about its assigned player type
    */
-  con.send((playerType == "WHITE") ? messages.S_PLAYER_A : messages.S_PLAYER_B);
-
+  con.send((playerType == "WHITE") ? messages.S_PLAYER_WHITE : messages.S_PLAYER_BLACK);
 
 });
 

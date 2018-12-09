@@ -84,10 +84,10 @@ Game.prototype.hasTwoConnectedPlayers = function () {
 
 Game.prototype.addPlayer = function (p) {
 
-  console.assert(p instanceof Object, "%s: Expecting an object (WebSocket), got a %s", arguments.callee.name, typeof p);
+  console.assert(p instanceof Object, `${arguments.callee.name}: Expecting an object (WebSocket), got a ${typeof p}`);
 
   if (this.GameState != "0 JOINED" && this.GameState != "1 JOINED") {
-    return new Error("Invalid call to addPlayer, current state is %s", this.GameState);
+    return new Error(`Invalid call to addPlayer, current state is ${this.GameState}` );
   }
 
   /*

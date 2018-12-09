@@ -11,7 +11,7 @@
             var instructionPage=document.getElementById('instructionPage');
             var close=document.getElementById("close");
             instructionButton.onclick = function(){
-                instructionPage.style.display="block";
+                instructionPage.style.display="block";  //fixed is better
             }
             close.onlick=function(){
                 instructionPage.style.display="none";
@@ -27,63 +27,67 @@
 </head>
 
 <body>
-    <main>
-        <div id="background">
+    <div id="background">
 
-            <img src="images/logo.png" alt="logo" class="logo">
+        <img src="images/logo.png" alt="logo" class="logo">
 
-            <div class="buttons">
-                <button type="button" id="play" class="buttons">
-                    Play
-                </button>
+        <div class="buttons">
+            <button type="button" id="play" class="buttons">
+                Play
+            </button>
 
-                <button type="button" id="instructions" class="buttons">
-                    Instructions
-                </button>
+            <button type="button" id="instructions" class="buttons">
+                Instructions
+            </button>
+        </div>
+
+        <div class="statistics">
+            <div class="auto-visible pastVisitor">
+                <img src="images/icons/eyeIcon.svg" alt="eye_pc" class="animage eyePc">
+                <span>
+                    <h1 id="pastVisitorNumber"> 0 </h1>
+                    <h1> past visitors </h1>
+                </span>
             </div>
 
-            <div class="statistics">
-                <div class="auto-visible pastVisitor">
-                    <img src="images/icons/eyeIcon.svg" alt="eye_pc" class="animage eyePc">
-                    <span>
-                        <h1 id="pastVisitorNumber"> 0 </h1>
-                        <h1> past visitors </h1>
-                    </span>
-                </div>
-
-                <div class="auto-visible ongoingGames">
-                    <img src="images/icons/GameIcon.svg" alt="board_pc" class="animage boardPc">
-                    <span>
-                        <h1 id="ongoingGamesNumber">0</h1>
-                        <h1>ongoing games</h1>
-                    </span>
-                </div>
-
-                <div class="auto-visible playersOnline">
-                    <img src="images/icons/playersIcon.svg" alt="people_pc" class="animage peoplePc">
-                    <span>
-                        <h1 id="playersOnlineNumber"> 0 </h1>
-                        <h1> players online </h1>
-                    </span>
-                </div>
+            <div class="auto-visible ongoingGames">
+                <img src="images/icons/GameIcon.svg" alt="board_pc" class="animage boardPc">
+                <span>
+                    <h1 id="ongoingGamesNumber">0</h1>
+                    <h1>ongoing games</h1>
+                </span>
             </div>
-            <div id="instructionPage" class="instructionPage">
-                <div class="instructionPageContent">
-                    <h1 id="instructionTitle"> Instructions </h1>
-                    <h1 id="line1"> The board always starts with 2 white disks and 2 black disks placed across each other.
-                                The player with black disk goes first.<br/>
-                    2. The black disk must be placed where there exists at least one straight (horizontal, vertical, or diagonal) 
-                                occupied line between the new disk and another black disk, with one or more contiguous white disks between them.<br/>
-                    3. The black disk must be placed where there exists at least one straight (horizontal, vertical, or diagonal) occupied line between the new disk and another black disk, 
-                                with one or more contiguous white disks between them.<br/>
-                    4. Next, it is the turn for the player with white disk. <br/>
-                    5. The rule for the player with white disk of placing the disk is the same with instruction 3. <br/>
-                    6. Next, it is the turn for the player with black disk. If one player is unable to connect an occupied line with the disk with the color assigned to him/her on the other side, play passes back to the other player. Shifts goes on and on. 
-                                When neither player can move, the game ends. At the end of the game, the player with the most pieces on the board wins.<br/>
-                    </h1>
-                    <h2 id="hint"> Hint: </h2>
-                    <button type="button" id="close"> Close </button>
-                </div> 
+
+            <div class="auto-visible playersOnline">
+                <img src="images/icons/playersIcon.svg" alt="people_pc" class="animage peoplePc">
+                <span>
+                    <h1 id="playersOnlineNumber"> 0 </h1>
+                    <h1> players online </h1>
+                </span>
+            </div>
+        </div>
+        <div id="instructionPage" class="instructionPage">
+            <div class="instructionPageContent">
+                <h1 id="instructionTitle"> Instructions </h1>
+                <h1 id="line1"> The board always starts with 2 white disks and 2 black disks placed across each other.
+                    The player with black disk goes first.<br />
+                    2. The black disk must be placed where there exists at least one straight (horizontal, vertical, or
+                    diagonal)
+                    occupied line between the new disk and another black disk, with one or more contiguous white disks
+                    between them.<br />
+                    3. The black disk must be placed where there exists at least one straight (horizontal, vertical, or
+                    diagonal) occupied line between the new disk and another black disk,
+                    with one or more contiguous white disks between them.<br />
+                    4. Next, it is the turn for the player with white disk. <br />
+                    5. The rule for the player with white disk of placing the disk is the same with instruction 3. <br />
+                    6. Next, it is the turn for the player with black disk. If one player is unable to connect an
+                    occupied line with the disk with the color assigned to him/her on the other side, play passes back
+                    to the other player. Shifts goes on and on.
+                    When neither player can move, the game ends. At the end of the game, the player with the most
+                    pieces on the board wins.<br />
+                </h1>
+                <h2 id="hint"> Hint: </h2>
+                <button type="button" id="close"> Close </button>
             </div>
         </div>
     </div>
