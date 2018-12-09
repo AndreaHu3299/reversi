@@ -32,7 +32,7 @@ body {
 .buttons {
     grid-area: buttons;
     position: relative;
-    top: 50px;
+    top: 150px;
     width: 200px;
     height: 60px;
     display: block;
@@ -64,9 +64,7 @@ body {
     background-color: green;
     margin: 20px;
     font-size: 30px;
-    /* position: relative;
-      top:30%; */
-<<<<<<< HEAD
+
 }
 
 #play:hover {
@@ -151,7 +149,6 @@ body {
 
     to {
         top: 50px;
-=======
   }
   
   #play:hover{
@@ -235,7 +232,6 @@ body {
   @keyframes jump{
       from {top:53px;}
       to {top:50px;}
->>>>>>> bdc4c105f452b3f57b02325e0f6f5601695afc21
     }
 }
 
