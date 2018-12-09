@@ -14,7 +14,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-app.get("/splash", indexRouter);
+app.get("/", indexRouter);
 app.get("/play", indexRouter);
 
 var server = http.createServer(app);
