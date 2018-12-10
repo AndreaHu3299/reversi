@@ -1,7 +1,13 @@
+body{
+    margin: 0;
+    width: 100%;
+    background-color:#426952;
+}
+
 body:fullscreen{
     margin: 0;
     width: 100%;
-    background-color: #426952;
+    background-color: yellowgreen;
 }
 
 #background {
