@@ -48,15 +48,7 @@
                 <img src="images/icons/eyeIcon.svg" alt="eye_pc" class="animage eyePc">
                 <span>
                     <h1 id="pastVisitorNumber"> 
-                        <%= gamesInitialized %> 
-                        <%if (gamesInitialized != 1) { %>
-                            games
-                        <% } else { %>
-                            game
-                        <% } %>
-                            initialized, 
-                        <%= gamesCompleted %> 
-                            completed
+                        <%= visitors %> 
                     </h1>
                     <h1> past visitors </h1>
                 </span>
@@ -66,15 +58,7 @@
                 <img src="images/icons/GameIcon.svg" alt="board_pc" class="animage boardPc">
                 <span>
                     <h1 id="ongoingGamesNumber">
-                        <%= gamesInitialized %> 
-                        <%if (gamesInitialized != 1) { %>
-                            games
-                        <% } else { %>
-                            game
-                        <% } %>
-                        initialized, 
-                        <%= gamesCompleted %> 
-                        completed
+                        <%= gamesOnGoing %> 
                     </h1>
                     <h1>ongoing games</h1>
                 </span>
@@ -84,15 +68,7 @@
                 <img src="images/icons/playersIcon.svg" alt="people_pc" class="animage peoplePc">
                 <span>
                     <h1 id="playersOnlineNumber"> 
-                        <%= gamesInitialized %> 
-                        <%if (gamesInitialized != 1) { %>
-                            games
-                        <% } else { %>
-                            game
-                        <% } %>
-                            initialized, 
-                        <%= gamesCompleted %> 
-                            completed
+                        <%= playerOnline %> 
                     </h1>
                     <h1> players online </h1>
                 </span>

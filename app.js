@@ -14,7 +14,6 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", indexRouter);
 app.get("/play", indexRouter);
 
 var server = http.createServer(app);
@@ -58,12 +57,10 @@ wss.on("connection", (ws) => {
 
 });
 
-var app = express();
-app.set('views', __dirname+'views');
+app.set('／views', __dirname+'views');
 //only the route to / needs to be changed
-app.set('view engine', 'ejs')
-app.get('/app', (req, res) => {
+app.get('/', (req, res) => {
     //example of data to render; here gameStatus is an object holding this information
-    res.render('splash.ejs', { gamesInitialized: gameStatus.gamesInitialized, gamesCompleted: gameStatus.gamesCompleted });
+    res.render('splash.ejs', { visitors: gameStatus.visitors, gamesOnGoing: gameStatus.gamesOngoing, playerOnline: gameStatus.playersOnline});
 })
 server.listen(port, () => console.log(`Listening on port ${port}`));
