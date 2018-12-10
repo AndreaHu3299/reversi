@@ -89,6 +89,11 @@ body{
     border: cadetblue solid 3px;
 }
 
+.diskHint:active {
+    opacity: 1;
+    border: gold solid 3px;
+}
+
 .hidden {
     display: none;
 }
