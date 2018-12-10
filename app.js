@@ -66,5 +66,5 @@ app.get("/", (req, res) => {
     gamesOnGoing: gameStatus.gamesOngoing,
     playerOnline: gameStatus.playersOnline
   });
-})
+});
 server.listen(port, () => console.log(`Listening on port ${port}`));
