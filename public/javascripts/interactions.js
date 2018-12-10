@@ -93,7 +93,7 @@ function GameState(board, playerWhite, playerBlack, socket) {
     };
 }
 
-function AlphabetBoard(gs) {
+function GameBoard(gs) {
 
     //only initialize for player that should actually be able to use the board
     this.initialize = function () {
@@ -116,16 +116,8 @@ function AlphabetBoard(gs) {
     };
 }
 
-function disableAlphabetButtons() {
-    var alphabet = document.getElementById("alphabet");
-    var letterDivs = alphabet.getElementsByTagName("div");
-    for (i = 0; i < letterDivs.length; i++) {
-        letterDivs.item(i).className += " alphabetDisabled";
-    }
-}
-
 function enableLoadingScreen() {
-    
+    document.getElementById("")
 }
 
 //set everything up, including the WebSocket
@@ -157,8 +149,6 @@ function enableLoadingScreen() {
 
             //if player type is WHITE, (1) pick a word, and (2) sent it to the server
             if (gs.getPlayerType() == "WHITE") {
-
-                disableAlphabetButtons();
 
                 sb.setStatus(Status["player1Intro"]);
                 let validWord = -1;
