@@ -7,10 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
     <link rel="stylesheet" href="stylesheets/game.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="javascripts/game.js"></script>
     <title>Reversi Online</title>
 </head>
 
 <body>
+    <!--
     <div id="loader-wrapper">
         <div id="coin">
             <div class="disk_white"></div>
@@ -21,7 +23,7 @@
         </div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>
+    </div>-->
     <div id="background">
         <div id="player1Sidebar" class="player_sidebar player1">
             <img src="images/icons/userIconBig.svg" class="profileImage">
@@ -129,8 +131,8 @@
             <img src="images/icons/clockIcon.svg" class="clockIcon" />
             <span id="player2Timer" class="infoText">00:00</span>
         </div>
-        <div id="fullscreenIconContainer">
-            <img src="images/icons/fullscreenIcon.svg">
+        <div id="fullscreenIconContainer" onclick="toggleFullscreen()">
+            <img id="fullscreenIcon" src="images/icons/fullscreenIcon.svg">
         </div>
 
     </div>

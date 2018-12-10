@@ -49,6 +49,11 @@
     };
     exports.S_PLAYER_BLACK = JSON.stringify(exports.O_PLAYER_BLACK);
 
+    exports.O_GAME_STARTED = {
+        "type": "GAME-STARTED"
+    };
+    exports.S_GAME_STARTED = JSON.stringify(exports.O_GAME_STARTED);
+
     /*
      * Player to server: send 
      */
@@ -57,7 +62,6 @@
         "type": exports.T_PLACE_A_DISK,
         "data": null
     };
-    // Exports.S_MAKE_A_GUESS does not exist, as data needs to be set
 
     /*
      * Server to Player A & B: game over with result won/loss

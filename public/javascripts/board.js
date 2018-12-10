@@ -93,10 +93,15 @@ Board.prototype.DIRECTION = [ // Defines different directions based on polar coo
  * @returns {boolean} return true if it was a valid move, false if it wasn"t;
  */
 Board.prototype.placeDisk = function placeDisk(player, position) {
+    if(player !== this.CELL_BLACK || player !== this.CELL_WHITE){   //better with console validate
+        return false;
+    }
     const cell = this.convertPosition(position);
     //console.assert(typeof player == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof player}`);
     const expected = (player === this.CELL_BLACK) ? this.CELL_BLACK_HINT : this.CELL_WHITE_HINT;
-    return (this.board[cell.y][cell.x].getValue() == expected);
+    const result = (this.board[cell.y][cell.x].getValue() == expected);
+    this.board[cell.y][cell.x].setValue(player);
+    return result;
 };
 
 /**
