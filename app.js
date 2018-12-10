@@ -57,10 +57,14 @@ wss.on("connection", (ws) => {
 
 });
 
-app.set('／views', __dirname+'views');
+app.set("／views", __dirname + "views");
 //only the route to / needs to be changed
-app.get('/', (req, res) => {
-    //example of data to render; here gameStatus is an object holding this information
-    res.render('splash.ejs', { visitors: gameStatus.visitors, gamesOnGoing: gameStatus.gamesOngoing, playerOnline: gameStatus.playersOnline});
+app.get("/", (req, res) => {
+  //example of data to render; here gameStatus is an object holding this information
+  res.render("splash.ejs", {
+    visitors: gameStatus.visitors,
+    gamesOnGoing: gameStatus.gamesOngoing,
+    playerOnline: gameStatus.playersOnline
+  });
 })
 server.listen(port, () => console.log(`Listening on port ${port}`));

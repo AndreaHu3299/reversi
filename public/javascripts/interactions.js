@@ -6,11 +6,6 @@ function GameState(board, playerWhite, playerBlack, socket) {
 
     this.playerType = null;
 
-    this.initializeVisibleWordArray = function () {
-        this.visibleWordArray = new Array(this.targetWord.length);
-        this.visibleWordArray.fill(Setup.HIDDEN_CHAR);
-    };
-
     this.getPlayerType = function () {
         return this.playerType;
     };
@@ -18,28 +13,6 @@ function GameState(board, playerWhite, playerBlack, socket) {
     this.setPlayerType = function (p) {
         console.assert(typeof p == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof p}`);
         this.playerType = p;
-    };
-
-    this.setTargetWord = function (w) {
-        console.assert(typeof w == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof w}`);
-        this.targetWord = w;
-    };
-
-    this.getVisibleWordArray = function () {
-        return this.visibleWordArray;
-    };
-
-    this.incrWrongGuess = function () {
-        this.wrongGuesses++;
-
-        if (this.whoWon() == null) {
-            //kill a balloon
-            let id = "b" + this.wrongGuesses;
-            document.getElementById(id).className += " balloonGone";
-            setTimeout(function () {
-                new Audio("../data/pop.wav").play();
-            }, 500);
-        }
     };
 
     this.whoWon = function () {
@@ -62,10 +35,6 @@ function GameState(board, playerWhite, playerBlack, socket) {
         for (let i = 0; i < indices.length; i++) {
             this.visibleWordArray[indices[i]] = letter;
         }
-    };
-
-    this.revealAll = function () {
-        this.visibleWordBoard.setWord(this.targetWord);
     };
 
     this.updateGame = function (clickedLetter) {
