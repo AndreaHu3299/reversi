@@ -58,4 +58,12 @@ wss.on("connection", (ws) => {
 
 });
 
+var app = express();
+app.set('views', __dirname+'views');
+//only the route to / needs to be changed
+app.set('view engine', 'ejs')
+app.get('/app', (req, res) => {
+    //example of data to render; here gameStatus is an object holding this information
+    res.render('splash.ejs', { gamesInitialized: gameStatus.gamesInitialized, gamesCompleted: gameStatus.gamesCompleted });
+})
 server.listen(port, () => console.log(`Listening on port ${port}`));
