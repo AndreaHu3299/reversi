@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
   //example of data to render; here gameStatus is an object holding this information
   res.render("splash.ejs", {
     visitors: gameStatus.visitors,
-    gamesOnGoing: gameStatus.gamesOngoing,
+    gamesOnGoing: gameStatus.gamesOnGoing,
     playerOnline: gameStatus.playersOnline
   });
 });
