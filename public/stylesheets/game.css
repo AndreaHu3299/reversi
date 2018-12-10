@@ -1,17 +1,31 @@
-body{
+#resolutionAlert {
+    visibility: hidden;
+    width: 1100px;
+    color: white;
+}
+
+@media only screen and (max-width: 1366px),
+screen and (max-height: 768px) {
+    #resolutionAlert {
+        visibility: visible;
+    }
+}
+
+body {
     margin: 0;
     width: 100%;
-    background-color:#426952;
+    background-color: #426952;
 }
 
 #background:fullscreen {
-    background-color:white;
+    background-color: white;
 }
 
-#background:not(:fullscreen){
-    background-color:#426952;
+#background:not(:fullscreen) {
+    background-color: #426952;
 }
-#background{
+
+#background {
     display: grid;
     justify-items: center;
     grid-template-columns: 1fr 2fr 1fr;
@@ -55,7 +69,6 @@ body{
 }
 
 .player2 {
-    grid-column: 3/4;
     grid-row: 1/4;
 }
 
