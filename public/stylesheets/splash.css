@@ -334,14 +334,12 @@ body:fullscreen {
     border-radius: 12px;
     position: relative;
     top: 100px;
-    transition-duration: 1s;
 }
 
 .auto-visible img {
     width: 50px;
     height: 50px;
     float: right;
-    transition-duration: 0.5s;
 } 
 
 .auto-visible span {
@@ -354,7 +352,6 @@ body:fullscreen {
     filter: Alpha(opacity=80);
     opacity: 0.9;
     /* padding: 2px; */
-    transition-duration: 1n s;
     float: right;
     border-radius: 12px;
 }
@@ -369,20 +366,21 @@ body:fullscreen {
     position: relative;
     right: -100px;
     top: 20px;
-    transition-duration: 0.5s;
     border-radius: 12px;
 }
 
 .auto-visible:hover img {
     position: relative;
     right: 200px;
-    transition-duration: 0.5s;
+    transition-duration: 3s;
 }
 
 .auto-visible:hover span {
     right: 0;
+    transition-duration: 0s;
 }
 
 .auto-visible:hover span h1 {
     right: 0;
+    transition-duration: 0s;
 }
