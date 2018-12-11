@@ -39,7 +39,6 @@ Game.prototype.playerPlaceDisk = function (playerType, cell) {
     if (playerType === "WHITE") {
         if (this.board.placeDisk(this.board.CELL_WHITE, cell)) {
             if (!this.board.isGameover(this.board.CELL_BLACK)) {
-                console.log("white gameover");
                 this.setStatus("BLACK TURN");
             } else gameover = true;
         }

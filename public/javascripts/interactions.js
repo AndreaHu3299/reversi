@@ -39,7 +39,7 @@ function GameState(board, playerWhite, playerBlack, statusBar, socket) {
 
     this.sendTimeout = function (winner) {
         console.assert(typeof winner == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof clickedLetter}`);
-        
+
         var outgoingMsg = Messages.O_TIMEOUT;
         outgoingMsg.data = winner;
         this.socket.send(JSON.stringify(outgoingMsg));
@@ -67,6 +67,14 @@ function GameState(board, playerWhite, playerBlack, statusBar, socket) {
         playerBlack.stopCounter();
     };
 
+    this.gameover = function () {
+        this.stopCounters();
+        const hintDisks = document.querySelectorAll(".diskHint");
+        Array.from(hintDisks).forEach(function (disk) {
+            disk.parentElement.removeChild(disk);
+        });
+    };
+
     //main update function
     this.updateBoard = function (board) {
         this.startCounters();
@@ -90,18 +98,18 @@ function GameBoard() {
                         if (cell.value != 0) {
                             let classes = ["disk"];
                             switch (cell.value) {
-                            case 1: //cell white
-                                whiteCount++;
-                            case 3:
-                                classes.push("disk_white");
-                                if (cell.value === 3) classes.push("diskHint");
-                                break;
-                            case 2: //cell black
-                                blackCount++;
-                            case 4:
-                                classes.push("disk_black");
-                                if (cell.value === 4) classes.push("diskHint");
-                                break;
+                                case 1: //cell white
+                                    whiteCount++;
+                                case 3:
+                                    classes.push("disk_white");
+                                    if (cell.value === 3) classes.push("diskHint");
+                                    break;
+                                case 2: //cell black
+                                    blackCount++;
+                                case 4:
+                                    classes.push("disk_black");
+                                    if (cell.value === 4) classes.push("diskHint");
+                                    break;
                             }
                             const currentCellIndex = cell.y * 8 + cell.x;
                             if (this.boardView.children[currentCellIndex].getElementsByClassName("disk").length == 0) {
@@ -135,7 +143,6 @@ function GameBoard() {
                 //remove all disk click listeners
                 Array.from(disks).forEach(function (disk) {
                     disk.parentElement.removeChild(disk);
-                    //.removeEventListener("click", singleClick, false);
                 });
             });
         });
@@ -173,12 +180,18 @@ function GameBoard() {
 
         if (incomingMsg.type == Messages.T_PLAYER_TURN) {
             gameState.setPlayerTurn(incomingMsg.data);
+            statusBar.setStatus(Status[(incomingMsg.data=="WHITE TURN")?"turnWhite":"turnBlack"]);
         }
 
         //set player type
         if (incomingMsg.type == Messages.T_PLAYER_TYPE) {
-            //alert("IM PLAYER "+incomingMsg.data); //TODO remove
+            //alert("IM PLAYER "+incomingMsg.data); //TODO remov
             gameState.setPlayerType(incomingMsg.data); //should be "WHITE" or "BLACK"
+        }
+
+        if (incomingMsg.type == Messages.T_GAME_OVER) {
+            statusBar.setStatus(incomingMsg.data);
+            gameState.gameover();
         }
     };
 

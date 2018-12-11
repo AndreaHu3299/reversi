@@ -49,7 +49,7 @@ var connectionID = 0; //each websocket receives a unique ID
 wss.on("connection", (ws) => {
     //increment the number of total visitors
     gameStatus.visitors++;
-
+    gameStatus.playersOnline++;
     let con = ws;
     con.id = connectionID++;
     let playerType = currentGame.addPlayer(con);
@@ -209,7 +209,7 @@ wss.on("connection", (ws) => {
                     console.log("Player Black closing: " + e);
                 }
             }
-
+            gameStatus.playersOnline--;
         }
     });
 });
