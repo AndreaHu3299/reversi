@@ -6,24 +6,7 @@
     <link rel="stylesheet" href="stylesheets/splash.css" />
     <link rel="stylesheet" href="stylesheets/style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>
-        window.onload = function(e) {
-            var instructionButton = document.getElementById('instructions');
-            var instructionPage=document.getElementById('instructionPage');
-            var close=document.getElementById('close');
-            instructionButton.onclick = function(){
-                instructionPage.style.display="fixed";  //fixed is better
-            }
-            close.onlick=function(){
-                instructionPage.style.display="none";
-            }
-            window.onclick=function(event){
-                if(event.target==instructionPage){
-                    instructionPage.style.display="none";
-                }
-            }
-        }
-    </script>
+    <script src="javascripts/splash.js"></script>
     <title> Reversi Online </title>
 </head>
 
@@ -50,8 +33,8 @@
                 <span>
                     <h1 id="pastVisitorNumber"> 
                         <%= visitors %> 
+                        past visitors 
                     </h1>
-                    <h1> past visitors </h1>
                 </span>
             </div>
 
@@ -60,8 +43,8 @@
                 <span>
                     <h1 id="ongoingGamesNumber">
                         <%= gamesOnGoing %> 
+                        ongoing games
                     </h1>
-                    <h1>ongoing games</h1>
                 </span>
             </div>
 
@@ -70,8 +53,8 @@
                 <span>
                     <h1 id="playersOnlineNumber"> 
                         <%= playerOnline %> 
+                        players online 
                     </h1>
-                    <h1> players online </h1>
                 </span>
             </div>
         </div>
@@ -96,7 +79,7 @@
                     pieces on the board wins.<br />
                 </h1>
                 <h2 id="hint"> Hint: </h2>
-                <button type="button" id="close"> Close </button>
+                <button type="button" id="close"> &#10060 </button>
             </div>
         </div>
         <div>

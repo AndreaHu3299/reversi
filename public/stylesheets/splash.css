@@ -42,13 +42,12 @@ body:fullscreen {
 
 .logo {
     grid-area: logo;
-    width: 500px;
-    height: 160px;
+    width: 600px;
+    height: 170px;
     position: relative;
+    right: 500px;
     top: 150px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    left: 0px;
 }
 
 .buttons {
@@ -184,8 +183,8 @@ body:fullscreen {
 
 .instructionPage {
     display: none;
-    opacity: 0.95;
-    background-color: grey;
+    opacity: 0.90;
+    background-color: white;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -201,16 +200,16 @@ body:fullscreen {
     background-color: green;
     color: white;
     font-size: 10px;
-    margin: 9%;
+    margin: 10%;
     width: 80%;
     border-radius: 10px;
 }
 
 #instructionTitle {
     border: 200%;
-    height: 100px;
+    height: 50px;
     text-align: center;
-    size: 50px;
+    size: 100px;
 }
 
 #line1::before {
@@ -220,7 +219,7 @@ body:fullscreen {
 }
 
 #hint::after {
-    height: 50px;
+    height: 100px;
     content: "the grids with dark shadow on the board will be the possible places to place a disk.";
     color: white;
     size: 10px;
@@ -265,6 +264,7 @@ body:fullscreen {
 .animage {
     overflow: auto;
     position: relative;
+    top: 100px;
     animation-name: jump;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -276,6 +276,8 @@ body:fullscreen {
     background-color: white;
     width: 50px;
     height: 50px;
+    position: relative;
+    top: 100px;
 }
 
 .boardPc {
@@ -323,56 +325,62 @@ body:fullscreen {
 }
 
 .auto-visible {
-    width: 100%;
+    /* width: 100%; */
     height: 100px;
     float: right;
-    position: relative;
+    /* position: relative; */
     /* box-shadow:3px 3px 10px #666; */
     overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+    top: 100px;
 }
 
 .auto-visible img {
     width: 50px;
     height: 50px;
     float: right;
-    position: relative;
-    -webkit-transition: right 0.5s ease;
-}
+} 
 
 .auto-visible span {
     width: 140px;
-    height: 25px;
+    height: 40px;
     /* background:#333; */
     position: relative;
-    right: -300px;
-    top: 50px;
+    right: -100px;
+    top: 20px;
     filter: Alpha(opacity=80);
-    -moz-opacity: 0.8;
-    opacity: 0.8;
-    padding: 2px;
-    -webkit-transition: right 0.5s ease;
+    opacity: 0.9;
+    /* padding: 2px; */
     float: right;
+    border-radius: 12px;
 }
 
 .auto-visible span h1 {
-    height: 25px;
+    height: 48px;
+    width: 150px;
     color: #000;
     background-color: #fff;
     font-size: 18px;
     text-align: center;
     position: relative;
-    right: -300px;
-    -webkit-transition: right 1s ease;
+    right: -100px;
+    top: 20px;
+    border-radius: 12px;
 }
 
 .auto-visible:hover img {
-    right: 0;
+    position: relative;
+    right: 200px;
+    transition-duration: 3s;
 }
 
 .auto-visible:hover span {
     right: 0;
+    transition-duration: 0s;
 }
 
 .auto-visible:hover span h1 {
     right: 0;
+    transition-duration: 0s;
 }
