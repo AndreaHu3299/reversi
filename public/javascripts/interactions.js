@@ -1,10 +1,18 @@
 /* ESLint global variables information */
-/* global Setup, Status, Messages, englishDict*/
+/* global Setup, Status, Messages*/
 
-/* basic constructor of game state */
-function GameState(board, playerWhite, playerBlack, socket) {
+function GameState(board, playerWhite, playerBlack, statusBar, socket) {
 
     this.playerType = null;
+    this.board = board;
+    board.setGameState(this);
+    this.playerWhite = playerWhite;
+    this.playerWhite.setGameState(this);
+    this.playerBlack = playerBlack;
+    this.playerBlack.setGameState(this);
+    this.statusBar = statusBar;
+    this.socket = socket;
+    this.playerTurn = null;
 
     this.getPlayerType = function () {
         return this.playerType;
@@ -13,197 +21,164 @@ function GameState(board, playerWhite, playerBlack, socket) {
     this.setPlayerType = function (p) {
         console.assert(typeof p == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof p}`);
         this.playerType = p;
+        const pYou = (p == "WHITE") ? this.playerWhite : this.playerBlack;
+        const pOpp = (p == "WHITE") ? this.playerBlack : this.playerWhite;
+        pYou.setPlayerName("You");
+        pOpp.setPlayerName("Opponent");
     };
 
-    this.whoWon = function () {
-        //too many wrong guesses? Player A (who set the word) won
-        if (this.wrongGuesses > Setup.MAX_ALLOWED_GUESSES) {
-            return "A";
-        }
-        //word solved? Player B won
-        if (this.visibleWordArray.indexOf("#") < 0) {
-            return "B";
-        }
-        return null; //nobody won yet
-    };
-
-    this.revealLetters = function (letter, indices) {
-
-        console.assert(typeof letter == "string", "%s: Expecting a string, got a %s", arguments.callee.name, typeof letter);
-        console.assert(indices instanceof Array, "%s: Expecting an array", arguments.callee.name);
-
-        for (let i = 0; i < indices.length; i++) {
-            this.visibleWordArray[indices[i]] = letter;
+    this.sendMove = function (clickedCell) {
+        console.assert((typeof clickedCell == "string" && clickedCell.length == 2), `${arguments.callee.name}: Expecting a string of length 2, got a ${typeof clickedLetter}`);
+        if (document.getElementById("cell_" + clickedCell).getElementsByClassName("diskHint").length > 0) {
+            this.stopCounters();
+            var outgoingMsg = Messages.O_PLACE_A_DISK;
+            outgoingMsg.data = clickedCell;
+            socket.send(JSON.stringify(outgoingMsg));
         }
     };
 
-    this.updateGame = function (clickedLetter) {
+    this.sendTimeout = function (winner) {
+        console.assert(typeof winner == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof clickedLetter}`);
+        
+        var outgoingMsg = Messages.O_TIMEOUT;
+        outgoingMsg.data = winner;
+        this.socket.send(JSON.stringify(outgoingMsg));
+    };
 
-        console.assert(typeof clickedLetter == "string", "%s: Expecting a string, got a %s", arguments.callee.name, typeof clickedLetter);
+    this.updateDiskCounts = function (diskCounts) {
+        playerWhite.updateDiskCount(diskCounts.playerWhite);
+        playerBlack.updateDiskCount(diskCounts.playerBlack);
+    };
 
-        var res = this.alphabet.getLetterInWordIndices(clickedLetter, this.targetWord);
+    this.setPlayerTurn = function (player) {
+        this.playerTurn = player;
+    };
 
-        //wrong guess
-        if (res.length == 0) {
-            this.incrWrongGuess();
+    this.startCounters = function () {
+        if (this.playerTurn == "WHITE TURN") {
+            playerWhite.startCounter();
         } else {
-            this.revealLetters(clickedLetter, res);
+            playerBlack.startCounter();
         }
+    };
 
-        this.alphabet.makeLetterUnAvailable(clickedLetter);
-        this.visibleWordBoard.setWord(this.visibleWordArray);
+    this.stopCounters = function () {
+        playerWhite.stopCounter();
+        playerBlack.stopCounter();
+    };
 
-        var outgoingMsg = Messages.O_MAKE_A_GUESS;
-        outgoingMsg.data = clickedLetter;
-        socket.send(JSON.stringify(outgoingMsg));
-
-        //is the game complete?
-        let winner = this.whoWon();
-
-        if (winner != null) {
-            this.revealAll();
-
-            /* disable further clicks by cloning each alphabet
-             * letter and not adding an event listener; then
-             * replace the original node through some DOM logic
-             */
-            var elements = document.querySelectorAll(".alphabet");
-            Array.from(elements).forEach(function (e) {
-                var cloned = e.cloneNode(true);
-                e.parentNode.replaceChild(cloned, e);
-            });
-
-            let alertString;
-            if (winner == this.playerType) {
-                alertString = Status["gameWon"];
-            } else {
-                alertString = Status["gameLost"];
-            }
-            alertString += Status["playAgain"];
-            sb.setStatus(alertString);
-
-            //player B sends final message
-            if (this.playerType == "B") {
-                let finalMsg = Messages.O_GAME_WON_BY;
-                finalMsg.data = winner;
-                socket.send(JSON.stringify(finalMsg));
-            }
-            socket.close();
-        }
+    //main update function
+    this.updateBoard = function (board) {
+        this.startCounters();
+        this.board.updateBoard(board);
+        this.board.initialize();
     };
 }
 
-function GameBoard(gs) {
+function GameBoard() {
+    this.gameState = null;
+    this.boardView = document.getElementById("gameBoard");
 
-    //only initialize for player that should actually be able to use the board
+    this.updateBoard = function (disksList) { //TODO change to matrix
+        console.assert(Array.isArray(disksList) || typeof disksList == "string", `Expecting an array, got a ${typeof disksList} instead`);
+        let whiteCount = 0;
+        let blackCount = 0;
+        if (Array.isArray(disksList)) {
+            disksList.forEach(row => {
+                if (Array.isArray(row)) {
+                    row.forEach(cell => {
+                        if (cell.value != 0) {
+                            let classes = ["disk"];
+                            switch (cell.value) {
+                            case 1: //cell white
+                                whiteCount++;
+                            case 3:
+                                classes.push("disk_white");
+                                if (cell.value === 3) classes.push("diskHint");
+                                break;
+                            case 2: //cell black
+                                blackCount++;
+                            case 4:
+                                classes.push("disk_black");
+                                if (cell.value === 4) classes.push("diskHint");
+                                break;
+                            }
+                            const currentCellIndex = cell.y * 8 + cell.x;
+                            if (this.boardView.children[currentCellIndex].getElementsByClassName("disk").length == 0) {
+                                const newDisk = document.createElement("div");
+                                newDisk.className = "disk";
+                                this.boardView.children[currentCellIndex].appendChild(newDisk);
+                            }
+                            this.boardView.children[currentCellIndex].getElementsByClassName("disk")[0].className = classes.join(" ");
+                        }
+                    });
+                }
+            });
+            this.gameState.updateDiskCounts({
+                playerWhite: whiteCount,
+                playerBlack: blackCount
+            });
+            this.gameState.startCounters();
+        }
+    };
+    //initialize after getting the board state
     this.initialize = function () {
 
-        var elements = document.querySelectorAll(".alphabet");
-        Array.from(elements).forEach(function (el) {
-
+        const disks = document.querySelectorAll(".diskHint");
+        const _this = this;
+        Array.from(disks).forEach(function (el) {
             el.addEventListener("click", function singleClick(e) {
-                var clickedLetter = e.target.id;
-                new Audio("../data/click.wav").play();
-                gs.updateGame(clickedLetter);
+                const clickedCell = e.target.parentElement.dataset.cellcoord;
+                new Audio("../sound/click.wav").play();
+                _this.gameState.sendMove(clickedCell);
 
-                /*
-                 * every letter can only be selected once; handling this within
-                 * JS is one option, here simply remove the event listener when a click happened 
-                 */
-                el.removeEventListener("click", singleClick, false);
+                //remove all disk click listeners
+                Array.from(disks).forEach(function (disk) {
+                    disk.parentElement.removeChild(disk);
+                    //.removeEventListener("click", singleClick, false);
+                });
             });
         });
     };
+
+    this.setGameState = function (gameState) {
+        this.gameState = gameState;
+    };
 }
 
-function enableLoadingScreen() {
-    document.getElementById("")
-}
 
 //set everything up, including the WebSocket
 (function setup() {
     var socket = new WebSocket(Setup.WEB_SOCKET_URL);
 
-    /*
-     * initialize all UI elements of the game:
-     * - visible word board (i.e. place where the hidden/unhidden word is shown)
-     * - status bar
-     * - alphabet board
-     * 
-     * the GameState object coordinates everything
-     */
-    const board = new Board();
+    const gameBoard = new GameBoard();
     const playerWhite = new PlayerWhite();
     const playerBlack = new PlayerBlack();
+    const statusBar = new StatusBar();
 
-    var gs = new GameState(board, playerWhite, playerBlack, socket);
+    var gameState = new GameState(gameBoard, playerWhite, playerBlack, statusBar, socket);
 
     socket.onmessage = function (event) {
 
         let incomingMsg = JSON.parse(event.data);
+        if (incomingMsg.type == Messages.T_GAME_STARTED) {
+            //alert("DISABLYING SCREEN"); //TODO remove
+            disableLoadingScreen();
+        }
+
+        if (incomingMsg.type == Messages.T_BOARD_STATE) {
+            //alert("GAMEBOARD UPDATED"); TODO remove
+            gameState.updateBoard(incomingMsg.data);
+        }
+
+        if (incomingMsg.type == Messages.T_PLAYER_TURN) {
+            gameState.setPlayerTurn(incomingMsg.data);
+        }
 
         //set player type
         if (incomingMsg.type == Messages.T_PLAYER_TYPE) {
-
-            gs.setPlayerType(incomingMsg.data); //should be "WHITE" or "BLACK"
-
-            //if player type is WHITE, (1) pick a word, and (2) sent it to the server
-            if (gs.getPlayerType() == "WHITE") {
-
-                sb.setStatus(Status["player1Intro"]);
-                let validWord = -1;
-                let promptString = Status["prompt"];
-                let res = null;
-
-                while (validWord < 0) {
-                    res = prompt(promptString);
-
-                    if (res == null) {
-                        promptString = Status["prompt"];
-                    } else {
-                        res = res.toUpperCase();
-
-                        if (res.length < Setup.MIN_WORD_LENGTH || res.length > Setup.MAX_WORD_LENGTH) {
-                            promptString = Status["promptAgainLength"];
-                        } else if (/^[a-zA-Z]+$/.test(res) == false) {
-                            promptString = Status["promptChars"];
-                        }
-                        //dictionary has only lowercase entries
-                        else if (englishDict.hasOwnProperty(res.toLocaleLowerCase()) == false) {
-                            promptString = Status["promptEnglish"];
-                        } else {
-                            validWord = 1;
-                        }
-                    }
-                }
-                sb.setStatus(Status["chosen"] + res);
-                gs.setTargetWord(res);
-                gs.initializeVisibleWordArray(); // initialize the word array, now that we have the word
-                vw.setWord(gs.getVisibleWordArray());
-
-                let outgoingMsg = Messages.O_TARGET_WORD;
-                outgoingMsg.data = res;
-                socket.send(JSON.stringify(outgoingMsg));
-            } else {
-                sb.setStatus(Status["player2IntroNoTargetYet"]);
-            }
-        }
-
-        //Player B: wait for target word and then start guessing ...
-        if (incomingMsg.type == Messages.T_TARGET_WORD && gs.getPlayerType() == "B") {
-            gs.setTargetWord(incomingMsg.data);
-
-            sb.setStatus(Status["player2Intro"]);
-            gs.initializeVisibleWordArray(); // initialize the word array, now that we have the word
-            ab.initialize();
-            vw.setWord(gs.getVisibleWordArray());
-        }
-
-
-        //Player A: wait for guesses and update the board ...
-        if (incomingMsg.type == Messages.T_MAKE_A_GUESS && gs.getPlayerType() == "A") {
-            sb.setStatus(Status["guessed"] + incomingMsg.data);
-            gs.updateGame(incomingMsg.data);
+            //alert("IM PLAYER "+incomingMsg.data); //TODO remove
+            gameState.setPlayerType(incomingMsg.data); //should be "WHITE" or "BLACK"
         }
     };
 
@@ -213,8 +188,8 @@ function enableLoadingScreen() {
 
     //server sends a close event only if the game was aborted from some side
     socket.onclose = function () {
-        if (gs.whoWon() == null) {
-            sb.setStatus(Status["aborted"]);
+        if (gameState.gameover === undefined) {
+            statusBar.setStatus(Status["aborted"]);
         }
     };
 

@@ -3,8 +3,10 @@ function toggleFullscreen() {
         (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
         (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
         (document.msFullscreenElement && document.msFullscreenElement !== null);
+
     var fullscreenIcon = document.getElementById("fullscreenIcon");
     var body = document.getElementsByTagName("body")[0];
+    
     if (isInFullScreen) {
         if (document.exitFullscreen) {
             document.exitFullscreen();

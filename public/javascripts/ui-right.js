@@ -1,51 +1,34 @@
-function Board() {
-    this.board = document.getElementById("gameBoard");
-    this.updateBoard = function (disksList) {
-        console.assert(Array.isArray(disksList) || typeof disksList == "string", `Expecting an array, got a ${typeof disksList} instead`);
-        if (Array.isArray(disksList)) {
-            disksList.forEach(disk => {
-                let classes = ["disk"];
-                Board.prototype.CELL_WHITE = 1;
-                Board.prototype.CELL_BLACK = 2;
-                Board.prototype.CELL_WHITE_HINT = 3;
-                Board.prototype.CELL_BLACK_HINT = 2;
-                switch (disk.value) {
-                case 1: //cell white
-                case 3:
-                    classes.push("disk_white");
-                    if (disk.value === 3) classes.push("diskHint");
-                    break;
-                case 2: //cell black
-                case 4:
-                    classes.push("disk_black");
-                    if (disk.value === 4) classes.push("diskHint");
-                    break;
-                default: //fallback
-                    classes.push("hidden");
-                }
-                this.board.children[disk.y * 8 + disk.x].className = classes.join(" ");
-            });
-        }
-    };
-}
+/* ESLint global variables information */
+/* global Setup*/
 
-function PlayerWhite() {
+function PlayerWhite(gameState) {
     this.timer;
+    this.gameState = null;
     this.timerDisplay = document.getElementById("player1Timer");
+    this.diskCount = document.getElementById("player1DiskCount");
 
     this.updateDiskCount = function (numDisks) {
         console.assert(((typeof numDisks === "number" && (numDisks % 1) === 0)) || typeof disksList == "string", `Expecting an array, got a ${typeof disksList} instead`);
+        this.diskCount.innerHTML = numDisks;
     };
 
-    this.startCounter = function() {
+    this.setPlayerName = function (name) {
+        document.getElementById("player1Username").innerHTML = name;
+    };
+
+    this.startCounter = function () {
+        this.stopCounter();
         this.timer = setInterval(myClock, 1000);
         let c = Setup.TIMER_MAX_TIME;
+        const _this = this;
+
         function myClock() {
-            this.timerDisplay.innerHTML = --c;
+            _this.timerDisplay.innerHTML = --c;
             if (c == 0) {
-                clearInterval(this.timer);
-                alert("Player white Gameover!");
+                clearInterval(_this.timer);
+                console.log("Player white Gameover!");
                 //TODO add gameover
+                _this.gameState.sendTimeout("BLACK");
             }
         }
     };
@@ -53,8 +36,64 @@ function PlayerWhite() {
     this.stopCounter = function () {
         clearInterval(this.timer);
     };
+
+    this.setGameState = function (gameState) {
+        this.gameState = gameState;
+    };
 }
 
-function PlayerBlack() {
+function PlayerBlack(gameState) {
+    this.timer;
+    this.gameState = null;
+    this.gameState = gameState;
+    this.timerDisplay = document.getElementById("player2Timer");
+    this.diskCount = document.getElementById("player2DiskCount");
 
+    this.updateDiskCount = function (numDisks) {
+        console.assert(((typeof numDisks === "number" && (numDisks % 1) === 0)) || typeof disksList == "string", `Expecting an array, got a ${typeof disksList} instead`);
+        this.diskCount.innerHTML = numDisks;
+    };
+
+    this.setPlayerName = function (name) {
+        document.getElementById("player2Username").innerHTML = name;
+    };
+
+    this.startCounter = function () {
+        this.stopCounter();
+        this.timer = setInterval(myClock, 1000);
+        let c = Setup.TIMER_MAX_TIME;
+        const _this = this;
+
+        function myClock() {
+            _this.timerDisplay.innerHTML = --c;
+            if (c == 0) {
+                clearInterval(_this.timer);
+                console.log("Player black gameover!");
+                _this.gameState.sendTimeout("WHITE");
+            }
+        }
+    };
+
+    this.stopCounter = function () {
+        if (this.timer != undefined) {
+            clearInterval(this.timer);
+        }
+    };
+
+    this.setGameState = function (gameState) {
+        this.gameState = gameState;
+    };
+}
+
+function disableLoadingScreen() {
+    document.getElementById("loader-wrapper").style.display = "none";
+}
+
+/*
+ * Object representing the status bar.
+ */
+function StatusBar() {
+    this.setStatus = function (status) {
+        document.getElementById("status").innerHTML = status;
+    };
 }

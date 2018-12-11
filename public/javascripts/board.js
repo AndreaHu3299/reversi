@@ -37,45 +37,45 @@ Board.prototype.CELL_EMPTY = 0;
 Board.prototype.CELL_WHITE = 1;
 Board.prototype.CELL_BLACK = 2;
 Board.prototype.CELL_WHITE_HINT = 3;
-Board.prototype.CELL_BLACK_HINT = 2;
+Board.prototype.CELL_BLACK_HINT = 4;
 
 Board.prototype.DIRECTION = [ // Defines different directions based on polar coordinates int the format of (y, x)
-    {
+    { // 0
         "direction": "N",
         "x": 0,
         "y": -1
     },
-    {
+    { // 1
         "direction": "NE",
         "x": 1,
         "y": -1
     },
-    {
+    { // 2
         "direction": "E",
         "x": 1,
         "y": 0
     },
-    {
+    { // 3
         "direction": "SE",
         "x": 1,
         "y": 1
     },
-    {
+    { // 4
         "direction": "S",
         "x": 0,
         "y": 1
     },
-    {
+    { // 5
         "direction": "SW",
         "x": -1,
         "y": 1
     },
-    {
+    { // 6
         "direction": "W",
         "x": -1,
         "y": 0
     },
-    {
+    { // 7g
         "direction": "NW",
         "x": -1,
         "y": -1
@@ -92,16 +92,32 @@ Board.prototype.DIRECTION = [ // Defines different directions based on polar coo
  * Returns
  * @returns {boolean} return true if it was a valid move, false if it wasn"t;
  */
-Board.prototype.placeDisk = function placeDisk(player, position) {
-    if(player !== this.CELL_BLACK || player !== this.CELL_WHITE){   //better with console validate
-        return false;
-    }
+Board.prototype.placeDisk = function (player, position) {
     const cell = this.convertPosition(position);
     //console.assert(typeof player == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof player}`);
-    const expected = (player === this.CELL_BLACK) ? this.CELL_BLACK_HINT : this.CELL_WHITE_HINT;
+    const expected = (player === this.CELL_WHITE) ? this.CELL_WHITE_HINT : this.CELL_BLACK_HINT;
+    this.updateBoard(player);
     const result = (this.board[cell.y][cell.x].getValue() == expected);
     this.board[cell.y][cell.x].setValue(player);
+    this.getValidDirections(player, cell).forEach((dir) => {
+        for (let x = cell.x + dir.x, y = cell.y + dir.y; x >= 0 && x < 8 && y >= 0 && y < 8; x += dir.x, y += dir.y) {
+            if (this.board[y][x].getValue() === player) {
+                break;
+            } else {
+                this.board[y][x].setValue(player);
+            }
+        }
+    });
     return result;
+};
+
+Board.prototype.getBoard = function (viewPlayer, turnPlayer) {
+    if (viewPlayer == turnPlayer) {
+        this.updateBoard(turnPlayer);
+    } else {
+        this.cleanBoard();
+    }
+    return this.board;
 };
 
 /**
@@ -109,19 +125,18 @@ Board.prototype.placeDisk = function placeDisk(player, position) {
  * @param {*} player
  * @param {*} cell
  */
-Board.prototype.checkValidAction = function checkValidAction(player, cell) {
+Board.prototype.getValidDirections = function (player, cell) {
     const opponent = (player === this.CELL_WHITE) ? this.CELL_BLACK : this.CELL_WHITE;
-    const validDirections = this.DIRECTION.map((dir) => {
+    const validDirections = this.DIRECTION.filter((dir) => {
         const tempX = cell.x + dir.x;
         const tempY = cell.y + dir.y;
-        return (!(tempX < 0 || tempX > 7 || tempY < 0 || tempY > 7)&&this.board[cell.y + dir.y][cell.x + dir.x].getValue() === opponent) ? this.checkValidActionDirection(player, cell, dir) : false;
+        return (!(tempX < 0 || tempX > 7 || tempY < 0 || tempY > 7) && this.board[cell.y + dir.y][cell.x + dir.x].getValue() === opponent) ? this.checkValidActionDirection(player, cell, dir) : false;
     });
-    const result = validDirections.reduce((acc, dirBool) => acc || dirBool, false);
-    return result;
+    return validDirections;
 };
 
 
-Board.prototype.checkValidActionDirection = function checkValidActionDirection(player, cell, direction) {
+Board.prototype.checkValidActionDirection = function (player, cell, direction) {
     for (let x = cell.x + direction.x * 2, y = cell.y + direction.y * 2; x >= 0 && x < 8 && y >= 0 && y < 8; x += direction.x, y += direction.y) {
         const disk = this.board[y][x].getValue();
 
@@ -139,7 +154,7 @@ Board.prototype.checkValidActionDirection = function checkValidActionDirection(p
  * @param {*} position a string representation of a cell on the board of type (a1)
  * @returns {Object} returns an object containing values x and y of the given position
  */
-Board.prototype.convertPosition = function convertPosition(position) {
+Board.prototype.convertPosition = function (position) {
     // check valid input
     console.assert(typeof position == "string", `${arguments.callee.name}: Expecting a string, got a ${typeof player}`);
     console.assert(position.length === 2, `${arguments.callee.name}: Expecting a string of length 2, got length ${position.length}`);
@@ -157,13 +172,56 @@ Board.prototype.convertPosition = function convertPosition(position) {
     };
 };
 
-Board.prototype.updateBoard = function updateBoard(player) {
-    const hintCell = (player === this.CELL_BLACK) ? this.CELL_BLACK_HINT : this.CELL_WHITE_HINT;
+Board.prototype.updateBoard = function (player) {
+    const hintCell = (player === this.CELL_WHITE) ? this.CELL_WHITE_HINT : this.CELL_BLACK_HINT;
     this.board.forEach((row, y) => {
         row.forEach((cell, x) => {
-            if (this.checkValidAction(player, {x: x,y: y})) this.board[y][x].setValue(hintCell);
+            if (cell.getValue() != this.CELL_WHITE && cell.getValue() != this.CELL_BLACK && this.getValidDirections(player, {
+                    x: x,
+                    y: y
+                }).length > 0) this.board[y][x].setValue(hintCell);
         });
     });
+};
+
+Board.prototype.cleanBoard = function () {
+    this.board.forEach((row) => {
+        row.forEach((cell) => {
+            if (cell.getValue() === this.CELL_WHITE_HINT || cell.getValue() === this.CELL_BLACK_HINT)
+                cell.setValue(this.CELL_EMPTY);
+        });
+    });
+};
+
+Board.prototype.isGameover = function (player) {
+    this.updateBoard(player);
+    return (!this.hasValidMovesLeft());
+};
+
+Board.prototype.hasValidMovesLeft = function () {
+    return this.board.reduce((accBoard, row) => {
+        return accBoard || row.reduce((accRow, cell) => {
+            return accRow || (cell.getValue() === this.CELL_WHITE_HINT || cell.getValue() === this.CELL_BLACK_HINT);
+        }, false);
+    }, false);
+};
+
+Board.prototype.getDiskCounts = function () {
+    //can be included in one single pass
+    let playerWhiteCount = this.board.reduce((accBoard, row) => {
+        return accBoard + row.reduce((accRow, cell) => {
+            return (cell.getValue() === this.CELL_WHITE) ? accRow + 1 : accRow;
+        }, 0);
+    }, 0);
+    let playerBlackCount = this.board.reduce((accBoard, row) => {
+        return accBoard + row.reduce((accRow, cell) => {
+            return (cell.getValue() === this.CELL_BLACK) ? accRow + 1 : accRow;
+        }, 0);
+    }, 0);
+    return {
+        playerWhiteCount: playerWhiteCount,
+        playerBlackCount: playerBlackCount
+    };
 };
 
 module.exports = Board;

@@ -1,15 +1,6 @@
 (function (exports) {
 
     /*
-     * Client to server: game is complete, the winner is ...
-     */
-    exports.T_GAME_WON_BY = "GAME-WON-BY";
-    exports.O_GAME_WON_BY = {
-        "type": exports.T_GAME_WON_BY,
-        "data": null
-    };
-
-    /*
      * Server to client: abort game (e.g. if second player exited the game)
      */
     exports.O_GAME_ABORTED = {
@@ -18,17 +9,13 @@
     exports.S_GAME_ABORTED = JSON.stringify(exports.O_GAME_ABORTED);
 
     /*
-     * Server to client: choose target word
+     * Server to client: player's turn (can be WHITE or BLACK)
      */
-    exports.O_TURN_WHITE = {
-        "type": "TURN-WHITE"
+    exports.T_PLAYER_TURN = "PLAYER-TURN";
+    exports.O_PLAYER_TURN = {
+        "type": exports.T_PLAYER_TURN,
+        "data": null
     };
-    exports.S_TURN_WHITE = JSON.stringify(exports.O_TURN_WHITE);
-
-    exports.O_TURN_BLACK = {
-        "type": "TURN-BLACK"
-    };
-    exports.S_TURN_BLACK = JSON.stringify(exports.O_TURN_BLACK);
 
     /*
      * Server to client: set as player white
@@ -49,26 +36,48 @@
     };
     exports.S_PLAYER_BLACK = JSON.stringify(exports.O_PLAYER_BLACK);
 
+    /*
+     * Server to client: start game and remove waiting screen
+     */
+    exports.T_GAME_STARTED = "GAME-STARTED";
     exports.O_GAME_STARTED = {
-        "type": "GAME-STARTED"
+        "type": exports.T_GAME_STARTED
     };
     exports.S_GAME_STARTED = JSON.stringify(exports.O_GAME_STARTED);
 
     /*
-     * Player to server: send 
+     * Server to players: their respective board state to be visualized
      */
-    exports.T_PLACE_A_DISK = "PLACE_A_DISK";
+    exports.T_BOARD_STATE = "BOARD-STATE";
+    exports.O_BOARD_STATE = {
+        "type": exports.T_BOARD_STATE,
+        "data": null
+    };
+
+    /*
+     * Server to clients: game over with result won/loss/draw
+     */
+    exports.T_GAME_OVER = "GAME-OVER";
+    exports.O_GAME_OVER = {
+        "type": exports.T_GAME_OVER,
+        "data": null
+    };
+
+    /*
+     * Player to server: sends the coordinates of the cell where to place the new disk 
+     */
+    exports.T_PLACE_A_DISK = "PLACE-A-DISK";
     exports.O_PLACE_A_DISK = {
         "type": exports.T_PLACE_A_DISK,
         "data": null
     };
 
     /*
-     * Server to Player A & B: game over with result won/loss
+     * Player to server: sends the timeout message if the opponent ran out of time
      */
-    exports.T_GAME_OVER = "GAME-OVER";
-    exports.O_GAME_OVER = {
-        "type": exports.T_GAME_OVER,
+    exports.T_TIMEOUT = "TIMEOUT";
+    exports.O_TIMEOUT = {
+        "type": exports.T_TIMEOUT,
         "data": null
     };
 

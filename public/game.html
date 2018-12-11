@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <link rel="stylesheet" href="stylesheets/style.css" />
     <link rel="stylesheet" href="stylesheets/game.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="javascripts/game.js"></script>
+    <!--<script src="javascripts/board.js"></script>-->
     <title>Reversi Online</title>
 </head>
 
 <body>
-    <!--
     <div id="loader-wrapper">
         <div id="coin">
             <div class="disk_white"></div>
@@ -23,15 +24,15 @@
         </div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>-->
+    </div>
     <div id="background">
         <div id="player1Sidebar" class="player_sidebar player1">
             <img src="images/icons/userIconBig.svg" class="profileImage">
-            <span if="player1Username" class="playerUsernameText">You</span>
+            <span id="player1Username" class="playerUsernameText">You</span>
             <div class="disk disk_white sidebarDisk"></div>
             <span id="player1DiskCount" class="infoText">2</span>
             <img src="images/icons/clockIcon.svg" class="clockIcon" />
-            <span id="player1Timer" class="infoText">00:12</span>
+            <span id="player1Timer" class="infoText">0</span>
         </div>
         <div id="gameBoard">
             <!--row 1-->
@@ -57,9 +58,7 @@
             <div id="cell_b3" class="cell" data-cellCoord="b3"></div>
             <div id="cell_c3" class="cell" data-cellCoord="c3"></div>
             <div id="cell_d3" class="cell" data-cellCoord="d3"></div>
-            <div id="cell_e3" class="cell" data-cellCoord="e3">
-                <div class="disk disk_white diskHint"></div>
-            </div>
+            <div id="cell_e3" class="cell" data-cellCoord="e3"></div>
             <div id="cell_f3" class="cell" data-cellCoord="f3"></div>
             <div id="cell_g3" class="cell" data-cellCoord="g3"></div>
             <div id="cell_h3" class="cell" data-cellCoord="h3"></div>
@@ -73,17 +72,13 @@
             <div id="cell_e4" class="cell" data-cellCoord="e4">
                 <div class="disk disk_black"></div>
             </div>
-            <div id="cell_f4" class="cell" data-cellCoord="f4">
-                <div class="disk disk_white diskHint"></div>
-            </div>
+            <div id="cell_f4" class="cell" data-cellCoord="f4"></div>
             <div id="cell_g4" class="cell" data-cellCoord="g4"></div>
             <div id="cell_h4" class="cell" data-cellCoord="h4"></div>
             <!--row 5-->
             <div id="cell_a5" class="cell" data-cellCoord="a5"></div>
             <div id="cell_b5" class="cell" data-cellCoord="b5"></div>
-            <div id="cell_c5" class="cell" data-cellCoord="c5">
-                <div class="disk disk_white diskHint"></div>
-            </div>
+            <div id="cell_c5" class="cell" data-cellCoord="c5"></div>
             <div id="cell_d5" class="cell" data-cellCoord="d5">
                 <div class="disk disk_black"></div>
             </div>
@@ -97,9 +92,7 @@
             <div id="cell_a6" class="cell" data-cellCoord="a6"></div>
             <div id="cell_b6" class="cell" data-cellCoord="b6"></div>
             <div id="cell_c6" class="cell" data-cellCoord="c6"></div>
-            <div id="cell_d6" class="cell" data-cellCoord="d6">
-                <div class="disk disk_white diskHint"></div>
-            </div>
+            <div id="cell_d6" class="cell" data-cellCoord="d6"></div>
             <div id="cell_e6" class="cell" data-cellCoord="e6"></div>
             <div id="cell_f6" class="cell" data-cellCoord="f6"></div>
             <div id="cell_g6" class="cell" data-cellCoord="g6"></div>
@@ -129,12 +122,14 @@
             <div class="disk disk_black sidebarDisk"></div>
             <span id="player2DiskCount" class="infoText">2</span>
             <img src="images/icons/clockIcon.svg" class="clockIcon" />
-            <span id="player2Timer" class="infoText">00:00</span>
+            <span id="player2Timer" class="infoText">0</span>
         </div>
         <div id="fullscreenIconContainer" onclick="toggleFullscreen()">
             <img id="fullscreenIcon" src="images/icons/fullscreenIcon.svg">
         </div>
-
+        <div id="statusBar">
+            <span id="status"></span>
+        </div>
     </div>
     <script src="javascripts/config.js"></script>
     <script src="javascripts/statuses.js"></script>

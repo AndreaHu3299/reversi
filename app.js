@@ -62,11 +62,21 @@ wss.on("connection", (ws) => {
      */
     con.send((playerType === "WHITE") ? messages.S_PLAYER_WHITE : messages.S_PLAYER_BLACK);
 
-    /*if (playerType === "BLACK"){
-      let msg = messages.O_PLACE_A_DISK;
-      msg.data = currentGame.getWord();
-      con.send(JSON.stringify(msg));
-    }*/
+    if (playerType === "BLACK") {
+        let msg = messages.S_GAME_STARTED;
+        con.send(msg);
+        let gameObj = websockets[con.id];
+        gameObj.playerWhite.send(msg);
+        //start game, set gamestate to white turn
+        gameObj.setStatus("BLACK TURN");
+        //send first game state to players
+        let playerMsg = messages.O_BOARD_STATE;
+        playerMsg.data = gameObj.getBoard(gameObj.board.CELL_WHITE);
+        gameObj.playerWhite.send(JSON.stringify(playerMsg));
+        let otherPlayerMsg = messages.O_BOARD_STATE;
+        otherPlayerMsg.data = gameObj.getBoard(gameObj.board.CELL_BLACK);
+        gameObj.playerBlack.send(JSON.stringify(otherPlayerMsg));
+    }
 
     /*
      * once we have two players, there is no way back; 
@@ -79,10 +89,7 @@ wss.on("connection", (ws) => {
 
 
     /*
-     * message coming in from a player:
-     *  1. determine the game object
-     *  2. determine the opposing player OP
-     *  3. send the message to OP 
+     * message coming in from a player
      */
     con.on("message", function incoming(message) {
 
@@ -91,45 +98,77 @@ wss.on("connection", (ws) => {
         let gameObj = websockets[con.id];
         let isPlayerWhite = (gameObj.playerWhite == con) ? true : false;
 
-        if (isPlayerWhite) {
-            if (gameObj.gameState == "WHITE TURN") {
-                if (oMsg.type == messages.T_PLACE_A_DISK) {
-                    gameObj.playerPlaceDisk("WHITE", oMsg.data);
-                    
-                    if (gameObj.hasTwoConnectedPlayers()) {
-                        gameObj.playerB.send(message);
-                    }
-                }
+        if (oMsg.type == messages.T_PLACE_A_DISK) {
+            const otherPlayer = (isPlayerWhite) ? gameObj.playerBlack : gameObj.playerWhite;
+            if (isPlayerWhite && gameObj.gameState === "WHITE TURN") {
+                gameObj.playerPlaceDisk("WHITE", oMsg.data);
+            } else if (!isPlayerWhite && gameObj.gameState === "BLACK TURN") {
+                gameObj.playerPlaceDisk("BLACK", oMsg.data);
             }
-            /*
-             * player A cannot do a lot, just send the target word;
-             * if player B is already available, send message to B
-             */
-            /*if (oMsg.type == messages.T_TARGET_WORD) {
-                gameObj.setWord(oMsg.data);
-
-                if (gameObj.hasTwoConnectedPlayers()) {
-                    gameObj.playerB.send(message);
+            if (gameObj.gameover != undefined) {
+                let gameoverMsg = messages.O_GAME_OVER;
+                const winner = gameObj.getWinner();
+                let playerWinner;
+                let playerLoser;
+                switch (winner) {
+                case "DRAW":
+                case "WHITE":
+                    playerWinner = gameObj.playerWhite;
+                    playerLoser = gameObj.playerBlack;
+                    break;
+                case "BLACK":
+                    playerWinner = gameObj.playerBlack;
+                    playerLoser = gameObj.playerWhite;
+                    break;
                 }
-            }*/
-        } else {
-            /*
-             * player B can make a guess; 
-             * this guess is forwarded to A
-             */
-            /*if (oMsg.type == messages.T_MAKE_A_GUESS) {
-                gameObj.playerA.send(message);
-                gameObj.setStatus("CHAR GUESSED");
-            }*/
+                if (winner !== "DRAW") {
+                    gameoverMsg.data = "gameWon";
+                    playerWinner.send(JSON.stringify(gameoverMsg));
+                    gameoverMsg.data = "gameLost";
+                    playerLoser.send(JSON.stringify(gameoverMsg));
+                } else {
+                    gameoverMsg.data = "gameDraw";
+                    playerWinner.send(JSON.stringify(gameoverMsg));
+                    playerLoser.send(JSON.stringify(gameoverMsg));
+                }
+                gameObj.finalStatus = winner;
+            } else {
+                let playerTurnMsg = messages.O_PLAYER_TURN;
+                playerTurnMsg.data = gameObj.gameState;
+                con.send(JSON.stringify(playerTurnMsg));
+                otherPlayer.send(JSON.stringify(playerTurnMsg));
 
-            /*
-             * player B can state who won/lost
-             */
-            /*if (oMsg.type == messages.T_GAME_WON_BY) {
-                gameObj.setStatus(oMsg.data);
-                //game was won by somebody, update statistics
-                gameStatus.gamesCompleted++;
-            }*/
+                let playerMsg = messages.O_BOARD_STATE;
+                playerMsg.data = gameObj.getBoard((isPlayerWhite) ? gameObj.board.CELL_WHITE : gameObj.board.CELL_BLACK);
+                con.send(JSON.stringify(playerMsg));
+
+                let otherPlayerMsg = messages.O_BOARD_STATE;
+                otherPlayerMsg.data = gameObj.getBoard((isPlayerWhite) ? gameObj.board.CELL_BLACK : gameObj.board.CELL_WHITE);
+                otherPlayer.send(JSON.stringify(otherPlayerMsg));
+            }
+        }
+
+
+        if (oMsg.type == messages.T_TIMEOUT) {
+            let gameoverMsg = messages.O_GAME_OVER;
+            const winner = oMsg.data;
+            let playerWinner;
+            let playerLoser;
+            switch (winner) {
+            case "WHITE":
+                playerWinner = gameObj.playerWhite;
+                playerLoser = gameObj.playerBlack;
+                break;
+            case "BLACK":
+                playerWinner = gameObj.playerBlack;
+                playerLoser = gameObj.playerWhite;
+                break;
+            }
+            gameoverMsg.data = "gameWon";
+            playerWinner.send(JSON.stringify(gameoverMsg));
+            gameoverMsg.data = "gameLost";
+            playerLoser.send(JSON.stringify(gameoverMsg));
+            gameObj.finalStatus = winner;
         }
     });
 
@@ -157,25 +196,22 @@ wss.on("connection", (ws) => {
                  * close it
                  */
                 try {
-                    gameObj.playerA.close();
-                    gameObj.playerA = null;
+                    gameObj.playerWhite.close();
+                    gameObj.playerWhite = null;
                 } catch (e) {
-                    console.log("Player A closing: " + e);
+                    console.log("Player White closing: " + e);
                 }
 
                 try {
-                    gameObj.playerB.close();
-                    gameObj.playerB = null;
+                    gameObj.playerBlack.close();
+                    gameObj.playerBlack = null;
                 } catch (e) {
-                    console.log("Player B closing: " + e);
+                    console.log("Player Black closing: " + e);
                 }
             }
 
         }
     });
 });
-
-//app.set("／views", __dirname + "views");
-//only the route to / needs to be changed
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

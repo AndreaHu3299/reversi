@@ -17,8 +17,37 @@ body {
     background-color: #426952;
 }
 
-#background:fullscreen {
-    background-color: white;
+body:-webkit-full-screen #background {
+    background-color: #444;
+}
+
+body:-moz-full-screen #background {
+    background-color: #444;
+}
+
+body:-ms-fullscreen #background {
+    background-color: #444;
+}
+
+body:fullscreen #background {
+    background-color: #444;
+}
+
+
+body:not(:-webkit-full-screen) #background {
+    background-color: #426952;
+}
+
+body:not(:-moz-full-screen) #background {
+    background-color: #426952;
+}
+
+body:not(:-ms-fullscreen) #background {
+    background-color: #426952;
+}
+
+body:not(:fullscreen) #background {
+    background-color: #426952;
 }
 
 #background:not(:fullscreen) {
@@ -140,7 +169,7 @@ body {
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
-    margin: auto;
+    margin: 0 auto;
     background: #ffffff;
 }
 
